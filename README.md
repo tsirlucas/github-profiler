@@ -1,5 +1,5 @@
 #Github Profiler
-Just another project...
+An application where you can search for Github users and add/edit/remove notes for each one
 
 ## Setup
 First install the node and npm requirements and make a symbolic link to nodejs
