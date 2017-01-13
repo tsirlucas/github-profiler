@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton, Avatar, Divider} from 'material-ui';
 import {searchUserAction} from './UserActions.jsx';
 import {listNotes} from '../Notes/NotesActions.jsx'
+import is from 'is_js';
 
 export default class User extends React.Component {
     componentDidMount() {
@@ -20,8 +21,10 @@ export default class User extends React.Component {
         let state = store.getState();
         const updateSearchText = (ev, text) => this.userInput = text.toLowerCase();
         const searchUser = () => {
-            store.dispatch(searchUserAction(this.userInput));
-            store.dispatch(listNotes(this.userInput))
+            if(is.not.empty(this.userInput) && is.not.undefined(this.userInput)){
+                store.dispatch(searchUserAction(this.userInput));
+                store.dispatch(listNotes(this.userInput))
+            }
         };
 
         return <UserTemplate state={state.UserReducer} handleUpdateInput={updateSearchText} searchUser={searchUser}/>

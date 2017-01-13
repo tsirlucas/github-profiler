@@ -2,6 +2,7 @@ import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton} from 'material-ui';
 import Delete from 'material-ui/svg-icons/action/delete';
 import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.jsx';
+import is from 'is_js';
 
 export default class Notes extends React.Component {
     componentWillMount() {
@@ -26,9 +27,21 @@ export default class Notes extends React.Component {
         let state = store.getState();
         let user = state.UserReducer.data.user.login;
         const handleUpdateInput = (ev, text) => this.userInput = text;
-        const addNoteHandler = () => store.dispatch(addNoteAction(this.userInput, user.toLowerCase()));
-        const removeNoteHandler = (note) => store.dispatch(removeNoteAction(note, user.toLowerCase()));
-        const editNoteHandler = (note, text) => store.dispatch(editNoteAction(note, text, user));
+        const addNoteHandler = () => {
+            if (is.not.undefined(user) && is.not.empty(user)) {
+                store.dispatch(addNoteAction(this.userInput, user.toLowerCase()));
+            }
+        };
+        const removeNoteHandler = (note) => {
+            if (is.not.undefined(user) && is.not.empty(user)) {
+                store.dispatch(removeNoteAction(note, user.toLowerCase()));
+            }
+        };
+        const editNoteHandler = (note, text) => {
+            if (is.not.undefined(user) && is.not.empty(user)) {
+                store.dispatch(editNoteAction(note, text, user));
+            }
+        };
 
         return <div className='col s12 m12 l4'>
             <NotesTemplate
