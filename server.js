@@ -7,15 +7,15 @@ const proxy = httpProxy.createProxyServer({
 const app = express();
 const isProduction = process.env.NODE_ENV === 'production';
 const port = isProduction ? process.env.PORT : 3000;
-const publicPath = path.resolve(__dirname, 'public');
+const publicPath = path.resolve(__dirname, 'dist');
 
 app.use(express.static(__dirname));
-app.use("/public", express.static(publicPath));
+app.use("/dist", express.static(publicPath));
 
 if (!isProduction) {
-    const bundle = require('./server/bundle.js');
+    const bundle = require('./dist/bundler.js');
     bundle();
-    app.all('/public/build/*', function (req, res) {
+    app.all('/dist/build/*', function (req, res) {
         proxy.web(req, res, {
             target: 'http://localhost:8080'
         });

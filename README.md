@@ -2,12 +2,7 @@
 Just another project...
 
 ## Setup
-First install the node and npm requirements and make a symbolic link to nodejs:
-
-```shellscript
-sudo apt-get install nodejs npm
-sudo ln -s /usr/bin/nodejs /usr/bin/node
-```
+First install the node and npm requirements and make a symbolic link to nodejs
 
 After that install the node dependencies:
 

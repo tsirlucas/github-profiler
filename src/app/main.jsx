@@ -8,7 +8,7 @@ import Routes from './Routes.jsx'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-require('../../public/style/import.scss');
+require('../style/import.scss');
 
 injectTapEventPlugin();
 

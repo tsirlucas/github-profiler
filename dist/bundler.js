@@ -17,7 +17,7 @@ module.exports = function () {
         console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
     });
     var bundler = new webpackDevServer(compiler, {
-        publicPath: '/public/build/',
+        publicPath: '/dist/build/',
         hot: true,
         quiet: false,
         noInfo: true,

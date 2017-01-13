@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
-const buildPath = path.resolve(__dirname, 'public', 'build');
-const mainPath = path.resolve(__dirname, 'src', 'app', 'main.js');
+const buildPath = path.resolve(__dirname, 'dist', 'build');
+const mainPath = path.resolve(__dirname, 'src', 'app', 'main.jsx');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 //NODE_ENV=production webpack -p --config webpack.production.config.js
@@ -20,7 +20,7 @@ const config = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
@@ -29,7 +29,7 @@ const config = {
                 }
             },
             {test: /\.(png|woff|woff2|eot|ttf|svg|ico)$/, loader: 'url-loader?limit=100000'},
-            {test: /\.scss$/, loaders: ExtractTextPlugin.extract('css!sass')}
+            {test: /\.scss$/, loaders: ExtractTextPlugin.extract('css-loader!sass-loader')}
 
         ]
 
