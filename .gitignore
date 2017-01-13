@@ -1,0 +1,10 @@
+src/style/**/*.css
+*.temp
+*.log
+debug/
+node_modules/
+
+# Intellij
+.idea/
+*.iml
+*.iws
