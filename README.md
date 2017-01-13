@@ -1,7 +1,7 @@
 #Github Profiler
 Just another project...
 
-## setup
+## Setup
 First install the node and npm requirements and make a symbolic link to nodejs:
 
 ```shellscript
