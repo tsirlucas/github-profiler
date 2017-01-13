@@ -1,6 +1,6 @@
 import React from 'react';
-import Notes from './components/Notes/Notes.js'
-import User from './components/User/User.js'
+import Notes from './components/Notes/Notes.jsx'
+import User from './components/User/User.jsx'
 
 export default class Home extends React.Component {
     render() {

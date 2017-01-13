@@ -1,6 +1,6 @@
-import Template from '../../src/app/Template.js';
-import Home from '../home/Home.js';
-import Bonus from '../bonus/Bonus.js';
+import Template from '../../src/app/Template.jsx';
+import Home from '../home/Home.jsx';
+import Bonus from '../bonus/Bonus.jsx';
 import React from 'react';
 import {Router, browserHistory} from 'react-router';
 

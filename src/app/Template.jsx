@@ -1,4 +1,4 @@
-import Navbar from '../app/components/Navbar.js';
+import Navbar from '../app/components/Navbar.jsx';
 import React from 'react';
 
 export default class App extends React.Component {

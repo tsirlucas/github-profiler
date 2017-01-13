@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton} from 'material-ui';
 import Delete from 'material-ui/svg-icons/action/delete';
-import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.js';
+import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.jsx';
 
 export default class Notes extends React.Component {
     componentWillMount() {

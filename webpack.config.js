@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const buildPath = path.resolve(__dirname, 'public', 'build');
-const mainPath = path.resolve(__dirname, 'src', 'app', 'main.js');
+const mainPath = path.resolve(__dirname, 'src', 'app', 'main.jsx');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const config = {
@@ -20,7 +20,7 @@ const config = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
