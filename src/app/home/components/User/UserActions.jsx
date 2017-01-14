@@ -12,7 +12,7 @@ const searchUserAction = (searchText) => {
                 if (!(data[0].message === 'Not Found' || data[1].message === 'Not Found')) {
                     dispatch({type: SEARCH_USER, data})
                 } else {
-                    console.warn('INVALID USERNAME!')
+                    dispatch({type: SEARCH_USER + '_ERROR', data})
                 }
             }
         )

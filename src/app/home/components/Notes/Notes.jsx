@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, CardHeader, List, ListItem, TextField, FlatButton} from 'material-ui';
+import {Card, CardHeader, List, ListItem, TextField, FlatButton, Snackbar} from 'material-ui';
 import Delete from 'material-ui/svg-icons/action/delete';
 import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.jsx';
 import is from 'is_js';
@@ -50,6 +50,7 @@ export default class Notes extends React.Component {
                 removeNoteHandler={removeNoteHandler}
                 handleUpdateInput={handleUpdateInput}
                 editNoteHandler={editNoteHandler}
+                invalidUsername={!user}
             />
         </div>
     }
@@ -59,7 +60,7 @@ Notes.contextTypes = {
     store: React.PropTypes.object
 };
 
-const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler}) => (
+const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername}) => (
     <Card>
         <CardHeader title='Notes'
                     subtitle='Click on item to edit'
@@ -84,15 +85,20 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
             })}
         </List>
         <div className='center-align'>
-            <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput}/>
+            <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput} invalidUsername={invalidUsername} />
         </div>
     </Card>
 );
 
-const NotesForm = ({handleUpdateInput, addNoteHandler}) => (
+const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername}) => (
     <div>
         <TextField id='user-input' onChange={handleUpdateInput}/>
         <FlatButton label='Add' onClick={addNoteHandler}/>
+        <Snackbar
+            open={invalidUsername}
+            message="INVALID USERNAME!"
+            autoHideDuration={3000}
+        />
     </div>
 );
 
