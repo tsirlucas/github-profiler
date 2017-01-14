@@ -1,9 +1,9 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import User from '../../../../src/app/home/components/User/User.jsx'
+import Notes from '../../../../src/app/home/components/Notes/Notes.jsx'
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import reducers from '../../../../src/app/reducers.jsx';
+import reducers from '../../../../src/app/reducers.js';
 import thunk from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -13,7 +13,7 @@ function setup() {
     const enzymeWrapper = mount(
         <Provider store={store}>
             <MuiThemeProvider>
-                <User />
+                <Notes />
             </MuiThemeProvider>
         </Provider>
     );
@@ -24,10 +24,10 @@ function setup() {
 }
 
 describe('components', () => {
-    describe('User', () => {
+    describe('Notes', () => {
         it('should self-render', () => {
             const {enzymeWrapper} = setup();
-            expect(enzymeWrapper.find(User)).toBeTruthy();
+            expect(enzymeWrapper.find(Notes)).toBeTruthy();
         });
     })
 });

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton, Avatar, Divider} from 'material-ui';
-import {searchUserAction} from './UserActions.jsx';
-import {listNotes} from '../Notes/NotesActions.jsx'
+import {searchUserAction} from './UserActions.js';
+import {listNotes} from '../Notes/NotesActions.js'
 import is from 'is_js';
 
 export default class User extends React.Component {

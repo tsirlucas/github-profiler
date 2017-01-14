@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import is from 'is_js'
-import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes.jsx';
+import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes.js';
 
 let nextActionId = 0;
 
