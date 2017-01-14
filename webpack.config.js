@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const path = require('path');
-const nodeModulesPath = path.resolve(__dirname, 'node_modules');
 const buildPath = path.resolve(__dirname, 'dist', 'build');
 const mainPath = path.resolve(__dirname, 'src', 'app', 'main.jsx');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');

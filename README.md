@@ -15,3 +15,9 @@ To run the server do:
 ```shellscript
 npm start
 ```
+
+## Running tests
+To run the tests do:
+```shellscript
+npm test
+```

@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch'
-
-const SEARCH_USER = 'SEARCH_USER';
+import {SEARCH_USER} from './UserActionsTypes.jsx'
 
 const searchUserAction = (searchText) => {
     return dispatch => Promise.all([

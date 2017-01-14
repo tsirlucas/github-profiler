@@ -10,7 +10,7 @@ export default class Navbar extends React.Component {
         };
 
         return (
-            <div>
+            <div className="navbar">
                 <AppBar title={'Github Profiler'}
                         showMenuIconButton={false}
                         children={<NavbarTabs transitions={transitions}/>}
@@ -34,7 +34,3 @@ const NavbarTabs = ({transitions}) => (
         />
     </Tabs>
 );
-
-Navbar.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};

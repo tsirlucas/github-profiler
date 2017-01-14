@@ -1,10 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import is from 'is_js'
-
-const ADD_NOTE = 'ADD_NOTE';
-const REMOVE_NOTE = 'REMOVE_NOTE';
-const EDIT_NOTE = 'EDIT_NOTE';
-const LIST_NOTES = 'LIST_NOTES';
+import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes.jsx';
 
 let nextActionId = 0;
 
@@ -22,7 +18,7 @@ const listNotes = (user) => {
                     nextActionId = data[data.length - 1].id + 1;
                     dispatch({type: LIST_NOTES, data})
                 } else if (is.object(data)) {
-                    dispatch({type: LIST_NOTES, data: {id: Object.keys(data)[0], text: data[Object.keys(data)[0]]}})
+                    dispatch({type: LIST_NOTES, data: [{id: Object.keys(data)[0], text: data[Object.keys(data)[0]]}]})
                 } else {
                     dispatch({type: LIST_NOTES, data: []})
                 }
