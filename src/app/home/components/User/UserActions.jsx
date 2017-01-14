@@ -8,8 +8,13 @@ const searchUserAction = (searchText) => {
     ])
         .then(responses => Promise.all(responses.map(response => response.json())))
         .then(
-            data => dispatch({type: SEARCH_USER, data}),
-            err => dispatch({type: SEARCH_USER + '_FAILURE', err})
+            data => {
+                if (!(data[0].message === 'Not Found' || data[1].message === 'Not Found')) {
+                    dispatch({type: SEARCH_USER, data})
+                } else {
+                    console.warn('INVALID USERNAME!')
+                }
+            }
         )
 };
 

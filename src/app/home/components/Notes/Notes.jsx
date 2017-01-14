@@ -69,13 +69,15 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
                 return <ListItem
                     key={notes.indexOf(note)}
                     rightIconButton={<RemoveButton removeNoteHandler={removeNoteHandler} note={note}/>}
-                    secondaryText={note.text}
+                    secondaryText={<span>{note.text}</span>}
                     primaryTogglesNestedList={true}
                     secondaryTextLines={2}
                     nestedItems={[
-                        <div style={{marginLeft: '30px'}}
-                             value={2}
-                             children={<EditForm editNoteHandler={editNoteHandler} note={note}/>}
+                        <ListItem style={{marginLeft: '30px'}}
+                                  hoverColor='white'
+                                  key={1}
+                                  value={2}
+                                  children={[<EditForm editNoteHandler={editNoteHandler} note={note}/>]}
                         />,
                     ]}
                 />
