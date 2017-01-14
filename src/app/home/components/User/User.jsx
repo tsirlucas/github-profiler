@@ -77,7 +77,7 @@ const UserCard = ({handleUpdateInput, searchUser, user}) => (
                     <div>Following: <span className='grey-text'>{user.following || 'Not available'}</span></div>
                 </li>
                 <li className='collection-item'>
-                    <div>Purlic Repos: <span className='grey-text'>{user.public_repos || 'Not available'}</span></div>
+                    <div>Public Repos: <span className='grey-text'>{user.public_repos || 'Not available'}</span></div>
                 </li>
                 <li className='collection-item'>
                     <div>Blog: <span className='grey-text'>{user.blog || 'Not available'}</span></div>
