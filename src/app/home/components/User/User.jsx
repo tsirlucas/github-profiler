@@ -33,7 +33,7 @@ export default class User extends React.Component {
     searchUser(e) {
         e.preventDefault();
         let store = this.context.store;
-        if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput)) {
+        if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
             store.dispatch(searchUserAction(this.state.userInput));
             store.dispatch(listNotes(this.state.userInput));
             this.state.userInput = '';
@@ -113,7 +113,7 @@ const UserCard = ({handleUpdateInput, searchUser, user, userToInput}) => (
 const UserSearch = ({handleUpdateInput, searchUser, userValue}) => (
     <form onSubmit={searchUser}>
         <TextField id='user-input' onChange={handleUpdateInput} value={userValue}/>
-        <FlatButton label='Search' onClick={searchUser}/>
+        <FlatButton label='Search' onClick={searchUser} disabled={userValue.trim().length <= 0}/>
     </form>
 );
 

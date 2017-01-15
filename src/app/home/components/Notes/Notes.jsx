@@ -42,7 +42,7 @@ export default class Notes extends React.Component {
         let store = this.context.store;
         let state = store.getState();
         let user = state.UserReducer.data.user.login;
-        if (is.not.undefined(user) && is.not.empty(user)) {
+        if (is.not.undefined(user) && is.not.empty(user) && this.state.userInput.trim().length > 0) {
             store.dispatch(addNoteAction(this.state.userInput, user.toLowerCase()));
             this.setState({userInput: ''})
         }
@@ -127,7 +127,7 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
 const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
         <TextField id='user-input' onChange={handleUpdateInput} value={userInput} disabled={invalidUsername || user === true}/>
-        <FlatButton label='Add' onClick={addNoteHandler} disabled={invalidUsername || user === true}/>
+        <FlatButton label='Add' onClick={addNoteHandler} disabled={invalidUsername || user === true || userInput.trim().length <= 0}/>
         <Snackbar
             open={invalidUsername}
             message="INVALID USERNAME!"
