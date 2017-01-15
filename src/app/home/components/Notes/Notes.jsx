@@ -1,10 +1,21 @@
 import React from 'react';
-import {Card, CardHeader, List, ListItem, TextField, FlatButton, Snackbar} from 'material-ui';
-import Delete from 'material-ui/svg-icons/action/delete';
+import {Card, CardHeader, List, ListItem, TextField, FlatButton, Snackbar, IconButton} from 'material-ui';
 import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.js';
 import is from 'is_js';
 
 export default class Notes extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userInput: ''
+        };
+
+        this.handleUpdateInput = this.handleUpdateInput.bind(this);
+        this.addNoteHandler = this.addNoteHandler.bind(this);
+        this.removeNoteHandler = this.removeNoteHandler.bind(this);
+        this.editNoteHandler = this.editNoteHandler.bind(this);
+    }
+
     componentWillMount() {
         let store = this.context.store;
         let user = store.getState().UserReducer.data.user.login;
@@ -22,35 +33,54 @@ export default class Notes extends React.Component {
         this.unsubscribe();
     }
 
+    handleUpdateInput(ev, text) {
+        this.setState({userInput: text});
+    }
+
+    addNoteHandler(e) {
+        e.preventDefault();
+        let store = this.context.store;
+        let state = store.getState();
+        let user = state.UserReducer.data.user.login;
+        if (is.not.undefined(user) && is.not.empty(user)) {
+            store.dispatch(addNoteAction(this.state.userInput, user.toLowerCase()));
+            this.setState({userInput: ''})
+        }
+    };
+
+    removeNoteHandler(e, note) {
+        e.stopPropagation();
+        let store = this.context.store;
+        let state = store.getState();
+        let user = state.UserReducer.data.user.login;
+        if (is.not.undefined(user) && is.not.empty(user)) {
+            store.dispatch(removeNoteAction(note, user.toLowerCase()));
+        }
+    };
+
+    editNoteHandler(note, text) {
+        let store = this.context.store;
+        let state = store.getState();
+        let user = state.UserReducer.data.user.login;
+        if (is.not.undefined(user) && is.not.empty(user)) {
+            store.dispatch(editNoteAction(note, text, user));
+        }
+    };
+
     render() {
         let store = this.context.store;
         let state = store.getState();
         let user = state.UserReducer.data.user.login;
-        const handleUpdateInput = (ev, text) => this.userInput = text;
-        const addNoteHandler = () => {
-            if (is.not.undefined(user) && is.not.empty(user)) {
-                store.dispatch(addNoteAction(this.userInput, user.toLowerCase()));
-            }
-        };
-        const removeNoteHandler = (note) => {
-            if (is.not.undefined(user) && is.not.empty(user)) {
-                store.dispatch(removeNoteAction(note, user.toLowerCase()));
-            }
-        };
-        const editNoteHandler = (note, text) => {
-            if (is.not.undefined(user) && is.not.empty(user)) {
-                store.dispatch(editNoteAction(note, text, user));
-            }
-        };
 
         return <div className='col s12 m12 l4'>
             <NotesTemplate
                 notes={state.NotesReducer.notes}
-                addNoteHandler={addNoteHandler}
-                removeNoteHandler={removeNoteHandler}
-                handleUpdateInput={handleUpdateInput}
-                editNoteHandler={editNoteHandler}
+                addNoteHandler={this.addNoteHandler}
+                removeNoteHandler={this.removeNoteHandler}
+                handleUpdateInput={this.handleUpdateInput}
+                editNoteHandler={this.editNoteHandler}
                 invalidUsername={!user}
+                userInput={this.state.userInput}
             />
         </div>
     }
@@ -60,7 +90,7 @@ Notes.contextTypes = {
     store: React.PropTypes.object
 };
 
-const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername}) => (
+const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername, userInput}) => (
     <Card>
         <CardHeader title='Notes'
                     subtitle='Click on item to edit'
@@ -69,7 +99,9 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
             {notes.map((note) => {
                 return <ListItem
                     key={notes.indexOf(note)}
-                    rightIconButton={<RemoveButton removeNoteHandler={removeNoteHandler} note={note}/>}
+                    rightIconButton={
+                        <IconButton onClick={(e) => removeNoteHandler(e, note)} iconClassName='fa fa-times'/>
+                    }
                     secondaryText={<span>{note.text}</span>}
                     primaryTogglesNestedList={true}
                     secondaryTextLines={2}
@@ -85,27 +117,24 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
             })}
         </List>
         <div className='center-align'>
-            <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput} invalidUsername={invalidUsername} />
+            <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput}
+                       invalidUsername={invalidUsername} userInput={userInput}/>
         </div>
     </Card>
 );
 
-const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername}) => (
-    <div>
-        <TextField id='user-input' onChange={handleUpdateInput}/>
+const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput}) => (
+    <form onSubmit={addNoteHandler}>
+        <TextField id='user-input' onChange={handleUpdateInput} value={userInput}/>
         <FlatButton label='Add' onClick={addNoteHandler}/>
         <Snackbar
             open={invalidUsername}
             message="INVALID USERNAME!"
             autoHideDuration={3000}
         />
-    </div>
+    </form>
 );
 
 const EditForm = ({editNoteHandler, note}) => (
     <TextField id='user-input' onChange={(ev, text) => editNoteHandler(note, text)}/>
-);
-
-const RemoveButton = ({removeNoteHandler, note}) => (
-    <Delete onClick={() => removeNoteHandler(note)} style={{float: 'right'}}/>
 );

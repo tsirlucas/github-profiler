@@ -5,6 +5,16 @@ import {listNotes} from '../Notes/NotesActions.js'
 import is from 'is_js';
 
 export default class User extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            userInput: ''
+        };
+
+        this.updateSearchText = this.updateSearchText.bind(this);
+        this.searchUser = this.searchUser.bind(this);
+    }
+
     componentDidMount() {
         let store = this.context.store;
         this.unsubscribe = store.subscribe(() => {
@@ -16,18 +26,30 @@ export default class User extends React.Component {
         this.unsubscribe();
     }
 
+    updateSearchText(e, text) {
+        this.setState({userInput: text.toLowerCase()});
+    }
+
+    searchUser(e) {
+        e.preventDefault();
+        let store = this.context.store;
+        if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput)) {
+            store.dispatch(searchUserAction(this.state.userInput));
+            store.dispatch(listNotes(this.state.userInput));
+            this.state.userInput = '';
+        }
+    }
+
     render() {
         let store = this.context.store;
         let state = store.getState();
-        const updateSearchText = (ev, text) => this.userInput = text.toLowerCase();
-        const searchUser = () => {
-            if(is.not.empty(this.userInput) && is.not.undefined(this.userInput)){
-                store.dispatch(searchUserAction(this.userInput));
-                store.dispatch(listNotes(this.userInput))
-            }
-        };
 
-        return <UserTemplate state={state.UserReducer} handleUpdateInput={updateSearchText} searchUser={searchUser}/>
+        return (
+            <UserTemplate state={state.UserReducer}
+                          handleUpdateInput={this.updateSearchText}
+                          searchUser={this.searchUser}
+                          userToInput={this.state.userInput}/>
+        )
     }
 }
 
@@ -35,14 +57,15 @@ User.contextTypes = {
     store: React.PropTypes.object
 };
 
-const UserTemplate = ({state, handleUpdateInput, searchUser}) => (
+const UserTemplate = ({state, handleUpdateInput, searchUser, userToInput}) => (
     <div>
-        <UserCard handleUpdateInput={handleUpdateInput} searchUser={searchUser} user={state.data.user}/>
+        <UserCard handleUpdateInput={handleUpdateInput} searchUser={searchUser} user={state.data.user}
+                  userToInput={userToInput}/>
         <Repos repos={state.data.repos}/>
     </div>
 );
 
-const UserCard = ({handleUpdateInput, searchUser, user}) => (
+const UserCard = ({handleUpdateInput, searchUser, user, userToInput}) => (
     <div className='col s12 m12 l4'>
         <Card>
             <CardHeader
@@ -50,7 +73,7 @@ const UserCard = ({handleUpdateInput, searchUser, user}) => (
                 subtitle='Users profile'
             />
             <div className='center-align'>
-                <UserSearch handleUpdateInput={handleUpdateInput} searchUser={searchUser}/>
+                <UserSearch handleUpdateInput={handleUpdateInput} searchUser={searchUser} userValue={userToInput}/>
             </div>
             <Divider />
             <div style={{padding: '10px'}}>
@@ -87,11 +110,11 @@ const UserCard = ({handleUpdateInput, searchUser, user}) => (
     </div>
 );
 
-const UserSearch = ({handleUpdateInput, searchUser}) => (
-    <div>
-        <TextField id='user-input' onChange={handleUpdateInput}/>
+const UserSearch = ({handleUpdateInput, searchUser, userValue}) => (
+    <form onSubmit={searchUser}>
+        <TextField id='user-input' onChange={handleUpdateInput} value={userValue}/>
         <FlatButton label='Search' onClick={searchUser}/>
-    </div>
+    </form>
 );
 
 const Repos = ({repos, removeHandler}) => (
