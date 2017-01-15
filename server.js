@@ -15,7 +15,7 @@ app.use("/dist", express.static(publicPath));
 if (!isProduction) {
     const bundle = require('./dist/bundler.js');
     bundle();
-    app.all('/dist/build/*', function (req, res) {
+    app.all('/build/*', function (req, res) {
         proxy.web(req, res, {
             target: 'http://localhost:8080'
         });

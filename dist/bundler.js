@@ -1,7 +1,6 @@
 var webpack = require('webpack');
 var webpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./../webpack.config.js');
-var path = require('path');
 var fs = require('fs');
 
 module.exports = function () {
@@ -17,7 +16,7 @@ module.exports = function () {
         console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
     });
     var bundler = new webpackDevServer(compiler, {
-        publicPath: '/dist/build/',
+        publicPath: '/build/',
         hot: true,
         quiet: false,
         noInfo: true,
