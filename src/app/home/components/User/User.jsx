@@ -76,7 +76,7 @@ const UserCard = ({handleUpdateInput, searchUser, user, userToInput}) => (
                 <UserSearch handleUpdateInput={handleUpdateInput} searchUser={searchUser} userValue={userToInput}/>
             </div>
             <Divider />
-            <div style={{padding: '10px'}}>
+            <div className="avatar-container">
                 <Avatar src={user.avatar_url}/> <span
                 className='right'>{user.login}</span>
             </div>
@@ -124,7 +124,7 @@ const Repos = ({repos, removeHandler}) => (
                 title='Repositories'
                 subtitle='Users repositories'
             />
-            <List>
+            <List className="repos-list">
                 {repos.map((repo) => {
                     return <ListItem
                         primaryText={repo.name}
