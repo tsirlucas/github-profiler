@@ -127,7 +127,7 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
 const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
         <TextField id='user-input' onChange={handleUpdateInput} value={userInput} disabled={invalidUsername || user === true}/>
-        <FlatButton label='Add' onClick={addNoteHandler}/>
+        <FlatButton label='Add' onClick={addNoteHandler} disabled={invalidUsername || user === true}/>
         <Snackbar
             open={invalidUsername}
             message="INVALID USERNAME!"
