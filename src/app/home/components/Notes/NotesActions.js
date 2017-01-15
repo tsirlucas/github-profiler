@@ -10,17 +10,18 @@ const listNotes = (user) => {
         .then(
             data => {
                 if (is.array(data)) {
-                    data = data.map((item) => {
+                    let parsedData = data.map((item) => {
                         if (item) {
                             return {id: data.indexOf(item), text: item}
                         }
                     }).filter((item) => item);
-                    nextActionId = data[data.length - 1].id + 1;
-                    dispatch({type: LIST_NOTES, data})
+                    nextActionId = parsedData[parsedData.length - 1].id + 1;
+                    dispatch({type: LIST_NOTES, data: parsedData})
                 } else if (is.object(data) && !data.hasOwnProperty('error')) {
                     let parsedData = Object.keys(data).map((item) => {
                         return {id: item, text: data[item]};
                     }).filter((item) => is.not.null(item.text));
+                    nextActionId = parsedData[parsedData.length - 1].id + 1;
                     dispatch({type: LIST_NOTES, data: parsedData})
                 } else {
                     dispatch({type: LIST_NOTES, data: []})
