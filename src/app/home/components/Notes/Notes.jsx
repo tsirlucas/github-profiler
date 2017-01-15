@@ -80,6 +80,7 @@ export default class Notes extends React.Component {
                 handleUpdateInput={this.handleUpdateInput}
                 editNoteHandler={this.editNoteHandler}
                 invalidUsername={!user}
+                user={user}
                 userInput={this.state.userInput}
             />
         </div>
@@ -90,7 +91,7 @@ Notes.contextTypes = {
     store: React.PropTypes.object
 };
 
-const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername, userInput}) => (
+const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername, userInput, user}) => (
     <Card>
         <CardHeader title='Notes'
                     subtitle='Click on item to edit'
@@ -118,14 +119,14 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
         </List>
         <div className='center-align'>
             <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput}
-                       invalidUsername={invalidUsername} userInput={userInput}/>
+                       invalidUsername={invalidUsername} userInput={userInput} user={user}/>
         </div>
     </Card>
 );
 
-const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput}) => (
+const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
-        <TextField id='user-input' onChange={handleUpdateInput} value={userInput}/>
+        <TextField id='user-input' onChange={handleUpdateInput} value={userInput} disabled={invalidUsername || user === true}/>
         <FlatButton label='Add' onClick={addNoteHandler}/>
         <Snackbar
             open={invalidUsername}

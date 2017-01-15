@@ -17,7 +17,7 @@ const listNotes = (user) => {
                     }).filter((item) => item);
                     nextActionId = data[data.length - 1].id + 1;
                     dispatch({type: LIST_NOTES, data})
-                } else if (is.object(data)) {
+                } else if (is.object(data) && !data.hasOwnProperty('error')) {
                     dispatch({type: LIST_NOTES, data: [{id: Object.keys(data)[0], text: data[Object.keys(data)[0]]}]})
                 } else {
                     dispatch({type: LIST_NOTES, data: []})
