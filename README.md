@@ -21,3 +21,14 @@ To run the tests do:
 ```shellscript
 npm test
 ```
+
+## Building production
+First install webpack globally:
+```shellscript
+npm install webpack -g
+```
+
+To run production builder do:
+```shellscript
+NODE_ENV=production webpack -p --config webpack.production.config.js
+```
