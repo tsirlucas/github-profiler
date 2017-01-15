@@ -18,7 +18,10 @@ const listNotes = (user) => {
                     nextActionId = data[data.length - 1].id + 1;
                     dispatch({type: LIST_NOTES, data})
                 } else if (is.object(data) && !data.hasOwnProperty('error')) {
-                    dispatch({type: LIST_NOTES, data: [{id: Object.keys(data)[0], text: data[Object.keys(data)[0]]}]})
+                    let parsedData = Object.keys(data).map((item) => {
+                        return {id: item, text: data[item]};
+                    }).filter((item) => is.not.null(item.text));
+                    dispatch({type: LIST_NOTES, data: parsedData})
                 } else {
                     dispatch({type: LIST_NOTES, data: []})
                 }
