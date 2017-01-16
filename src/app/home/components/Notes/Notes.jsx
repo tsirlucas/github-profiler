@@ -96,7 +96,7 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
         <CardHeader title='Notes'
                     subtitle='Click on item to edit'
         />
-        <List>
+        <List className="notes-list">
             {notes.map((note) => {
                 return <ListItem
                     key={notes.indexOf(note)}
@@ -112,7 +112,7 @@ const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHand
                                   key={1}
                                   value={2}
                                   children={[<EditForm editNoteHandler={editNoteHandler} note={note}/>]}
-                        />,
+                        />
                     ]}
                 />
             })}

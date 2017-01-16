@@ -44,11 +44,23 @@ export default class User extends React.Component {
         let store = this.context.store;
         let state = store.getState();
 
+        const userLabels = {
+            name: 'Name',
+            email: 'Email',
+            location: 'Location',
+            company: 'Company',
+            followers: 'Followers',
+            following: 'Following',
+            public_repos: 'Public repos',
+            blog: 'Blog'
+        };
+
         return (
             <UserTemplate state={state.UserReducer}
                           handleUpdateInput={this.updateSearchText}
                           searchUser={this.searchUser}
-                          userToInput={this.state.userInput}/>
+                          userToInput={this.state.userInput}
+                          userLabels={userLabels}/>
         )
     }
 }
@@ -57,15 +69,15 @@ User.contextTypes = {
     store: React.PropTypes.object
 };
 
-const UserTemplate = ({state, handleUpdateInput, searchUser, userToInput}) => (
+const UserTemplate = ({state, handleUpdateInput, searchUser, userToInput, userLabels}) => (
     <div>
         <UserCard handleUpdateInput={handleUpdateInput} searchUser={searchUser} user={state.data.user}
-                  userToInput={userToInput}/>
+                  userToInput={userToInput} userLabels={userLabels}/>
         <Repos repos={state.data.repos}/>
     </div>
 );
 
-const UserCard = ({handleUpdateInput, searchUser, user, userToInput}) => (
+const UserCard = ({handleUpdateInput, searchUser, user, userToInput, userLabels}) => (
     <div className='col s12 m12 l4'>
         <Card>
             <CardHeader
@@ -81,30 +93,13 @@ const UserCard = ({handleUpdateInput, searchUser, user, userToInput}) => (
                 className='right'>{user.login}</span>
             </div>
             <ul className='collection'>
-                <li className='collection-item'>
-                    <div>Name: <span className='grey-text'>{user.name || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Email: <span className='grey-text'>{user.email || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Location: <span className='grey-text'>{user.location || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Company: <span className='grey-text'>{user.company || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Followers: <span className='grey-text'>{user.followers || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Following: <span className='grey-text'>{user.following || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Public Repos: <span className='grey-text'>{user.public_repos || 'Not available'}</span></div>
-                </li>
-                <li className='collection-item'>
-                    <div>Blog: <span className='grey-text'>{user.blog || 'Not available'}</span></div>
-                </li>
+                {Object.keys(userLabels).map((key, index) => {
+                    return (
+                        <li className='collection-item' key={index}>
+                            <div>{userLabels[key]}: <span className='grey-text'>{user[key] || 'Not available'}</span></div>
+                        </li>
+                    )
+                })}
             </ul>
         </Card>
     </div>
