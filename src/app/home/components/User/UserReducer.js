@@ -1,4 +1,4 @@
-import {SEARCH_USER} from './UserActionsTypes.js';
+import {SEARCH_USER} from './UserActionsTypes';
 
 const UserReducer = (state = {data: {user: {login: true}, repos: []}}, action) => {
     switch (action.type) {

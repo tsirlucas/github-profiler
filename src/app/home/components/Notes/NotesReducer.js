@@ -1,5 +1,5 @@
 import is from 'is_js';
-import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes.js';
+import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes';
 
 const NotesReducer = (state = {notes: []}, action) => {
     switch (action.type) {

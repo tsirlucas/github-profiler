@@ -33,6 +33,9 @@ const config = {
         ]
 
     },
+    resolve: {
+        extensions: ['.js', '.jsx']
+    },
     plugins: [
         new ExtractTextPlugin({
             filename: 'styles.css',

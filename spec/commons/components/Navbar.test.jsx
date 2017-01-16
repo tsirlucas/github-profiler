@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import Navbar from '../../../src/app/commons/components/Navbar.jsx'
+import Navbar from '../../../src/app/commons/components/Navbar'
 
 function setup() {
     const enzymeWrapper = shallow(<Navbar />);

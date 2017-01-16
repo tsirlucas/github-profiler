@@ -2,9 +2,9 @@ import React from 'react';
 import {Provider} from 'react-redux';
 import ReactDOM from 'react-dom';
 import {createStore, applyMiddleware} from 'redux';
-import reducers from './reducers.js';
+import reducers from './reducers';
 import thunk from 'redux-thunk';
-import Routes from './Routes.jsx'
+import Routes from './Routes'
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

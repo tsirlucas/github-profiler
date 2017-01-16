@@ -3,7 +3,7 @@ import {mount} from 'enzyme'
 import Notes from '../../../../src/app/home/components/Notes/Notes.jsx'
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
-import reducers from '../../../../src/app/reducers.js';
+import reducers from '../../../../src/app/reducers';
 import thunk from 'redux-thunk';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 

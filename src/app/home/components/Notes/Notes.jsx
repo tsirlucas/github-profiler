@@ -1,6 +1,6 @@
 import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton, Snackbar, IconButton} from 'material-ui';
-import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions.js';
+import {addNoteAction, removeNoteAction, editNoteAction, listNotes} from './NotesActions';
 import is from 'is_js';
 
 export default class Notes extends React.Component {
