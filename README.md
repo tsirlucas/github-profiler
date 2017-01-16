@@ -25,5 +25,5 @@ npm test
 ## Building production
 To run production builder do:
 ```shellscript
-npm build
+npm run build-prod
 ```
