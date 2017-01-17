@@ -7,7 +7,7 @@ const UserReducer = (state = {data: {user: {login: true}, repos: []}}, action) =
         case SEARCH_USER + '_ERROR':
             return {data: {user: false, repos: []}};
         default:
-            return state
+            return state;
     }
 };
 

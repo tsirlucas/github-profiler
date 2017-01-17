@@ -5,7 +5,7 @@ const NotesReducer = (state = {notes: []}, action) => {
     switch (action.type) {
         case LIST_NOTES:
             if(is.not.array(action.data)) {
-                return {notes: [Object.assign(action.data)]}
+                return {notes: [Object.assign(action.data)]};
             }
             return {notes: action.data.splice(0)};
         case ADD_NOTE:
@@ -18,7 +18,7 @@ const NotesReducer = (state = {notes: []}, action) => {
         case REMOVE_NOTE:
             return {
                 notes: state.notes.filter((note) => {
-                    return note.id !== action.data.id
+                    return note.id !== action.data.id;
                 })
             };
         case EDIT_NOTE:
@@ -31,7 +31,7 @@ const NotesReducer = (state = {notes: []}, action) => {
                 })
             };
         default:
-            return state
+            return state;
     }
 };
 

@@ -10,7 +10,7 @@ const port = isProduction ? process.env.PORT : 3000;
 const publicPath = path.resolve(__dirname, 'dist');
 
 app.use(express.static(__dirname));
-app.use("/dist", express.static(publicPath));
+app.use('/dist', express.static(publicPath));
 
 if (!isProduction) {
     const bundle = require('./dist/bundler.js');
@@ -22,7 +22,7 @@ if (!isProduction) {
     });
 }
 
-proxy.on('error', function(e) {
+proxy.on('error', function() {
     console.log('Could not connect to proxy, please try again...');
 });
 

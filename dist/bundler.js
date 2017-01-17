@@ -1,7 +1,6 @@
 var webpack = require('webpack');
-var webpackDevServer = require('webpack-dev-server');
+var WebpackDevServer = require('webpack-dev-server');
 var webpackConfig = require('./../webpack.config.js');
-var fs = require('fs');
 
 module.exports = function () {
     var bundleStart = null;
@@ -15,7 +14,7 @@ module.exports = function () {
     compiler.plugin('done', function() {
         console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
     });
-    var bundler = new webpackDevServer(compiler, {
+    var bundler = new WebpackDevServer(compiler, {
         publicPath: '/build/',
         hot: true,
         quiet: false,

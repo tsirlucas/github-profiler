@@ -41,6 +41,8 @@ describe('Notes reducer', () => {
                 type: types.LIST_NOTES,
                 data: [{id: 1, text: 'text1'}, {id: 2, text: 'text2'}, {id: 3, text: 'text3'}]
             })
-        ).toEqual({notes: [{id: 1, text: 'text1'}, {id: 2, text: 'text2'}, {id: 3, text: 'text3'}]});
+        ).toEqual({
+            notes: [{id: 1, text: 'text1'}, {id: 2, text: 'text2'}, {id: 3, text: 'text3'}]
+        });
     })
 });
