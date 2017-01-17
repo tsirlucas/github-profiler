@@ -22,10 +22,10 @@ To run the tests do:
 npm test
 ```
 
-## Running JSHint
-To run the JSHint do:
+## Running ESLint
+To run the ESLint do:
 ```shellscript
-npm jshint
+npm run eslint
 ```
 
 ## Building production

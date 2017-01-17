@@ -4,11 +4,11 @@ import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes'
 
 let nextActionId = 0;
 
-const listNotes = (user) => {
-    return dispatch => fetch(`https://github-profiler-1ac46.firebaseio.com/${user}/notes/.json`)
+const listNotes = user =>
+    dispatch => fetch(`https://github-profiler-1ac46.firebaseio.com/${user}/notes/.json`)
         .then(response => response.json())
         .then(
-            data => {
+            (data) => {
                 if (is.array(data)) {
                     let parsedData = data.map((item) => {
                         if (item) {
@@ -17,8 +17,8 @@ const listNotes = (user) => {
                     }).filter((item) => item);
                     nextActionId = parsedData[parsedData.length - 1].id + 1;
                     dispatch({type: LIST_NOTES, data: parsedData});
-                } else if (is.object(data) && !data.hasOwnProperty('error')) {
-                    let parsedData = Object.keys(data).map((item) => {
+                } else if (is.object(data) && !data.hasOwnProperty("error")) {
+                    const parsedData = Object.keys(data).map((item) => {
                         return {id: item, text: data[item]};
                     }).filter((item) => is.not.null(item.text));
                     nextActionId = parsedData[parsedData.length - 1].id + 1;
@@ -28,7 +28,7 @@ const listNotes = (user) => {
                 }
             }
         );
-};
+
 
 const addNoteAction = (note, user) => {
     return dispatch => fetch(

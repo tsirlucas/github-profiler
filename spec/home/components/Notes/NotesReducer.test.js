@@ -1,11 +1,11 @@
-import reducer from 'app/home/components/Notes/NotesReducer'
-import * as types from 'app/home/components/Notes/NotesActionsTypes'
+import reducer from 'app/home/components/Notes/NotesReducer';
+import * as types from 'app/home/components/Notes/NotesActionsTypes';
 
 describe('Notes reducer', () => {
     it('should return the initial state', () => {
         expect(
             reducer({notes: []}, {})
-        ).toEqual({notes: []})
+        ).toEqual({notes: []});
     });
 
     it('should handle ADD_NOTE', () => {
@@ -44,5 +44,5 @@ describe('Notes reducer', () => {
         ).toEqual({
             notes: [{id: 1, text: 'text1'}, {id: 2, text: 'text2'}, {id: 3, text: 'text3'}]
         });
-    })
+    });
 });

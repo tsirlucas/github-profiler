@@ -1,15 +1,15 @@
-import configureMockStore from 'redux-mock-store'
-import thunk from 'redux-thunk'
-import * as actions from 'app/home/components/Notes/NotesActions'
-import * as types from 'app/home/components/Notes/NotesActionsTypes'
-import nock from 'nock'
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
+import * as actions from 'app/home/components/Notes/NotesActions';
+import * as types from 'app/home/components/Notes/NotesActionsTypes';
+import nock from 'nock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe('Notes actions', () => {
     afterEach(() => {
-        nock.cleanAll()
+        nock.cleanAll();
     });
 
     it('creates ADD_NOTE when addNoteAction has been done', () => {
@@ -23,8 +23,8 @@ describe('Notes actions', () => {
 
         return store.dispatch(actions.addNoteAction('text', 'test'))
             .then(() => {
-                expect(store.getActions()).toEqual(expectedActions)
-            })
+                expect(store.getActions()).toEqual(expectedActions);
+            });
     });
 
     it('creates EDIT_NOTE when editNoteAction has been done', () => {
@@ -38,8 +38,8 @@ describe('Notes actions', () => {
 
         return store.dispatch(actions.editNoteAction({id: 0, text: 'text'}, 'newText', 'test'))
             .then(() => {
-                expect(store.getActions()).toEqual(expectedActions)
-            })
+                expect(store.getActions()).toEqual(expectedActions);
+            });
     });
 
     it('creates REMOVE_NOTE when removeNoteAction has been done', () => {
@@ -53,8 +53,8 @@ describe('Notes actions', () => {
 
         return store.dispatch(actions.removeNoteAction({id: 0, text: 'text'}, 'test'))
             .then(() => {
-                expect(store.getActions()).toEqual(expectedActions)
-            })
+                expect(store.getActions()).toEqual(expectedActions);
+            });
     });
 
     it('creates LIST_NOTES when listNotes has been done', () => {
@@ -69,7 +69,7 @@ describe('Notes actions', () => {
 
         return store.dispatch(actions.listNotes('test'))
             .then(() => {
-                expect(store.getActions()).toEqual(expectedActions)
-            })
-    })
+                expect(store.getActions()).toEqual(expectedActions);
+            });
+    });
 });

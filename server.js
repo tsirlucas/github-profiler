@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const httpProxy = require('http-proxy');
+const bundle = require('./dist/bundler.js');
+
 const proxy = httpProxy.createProxyServer({
     changeOrigin: true
 });
@@ -13,19 +15,18 @@ app.use(express.static(__dirname));
 app.use('/dist', express.static(publicPath));
 
 if (!isProduction) {
-    const bundle = require('./dist/bundler.js');
     bundle();
-    app.all('/build/*', function (req, res) {
+    app.all('/build/*', (req, res) => {
         proxy.web(req, res, {
             target: 'http://localhost:8080'
         });
     });
 }
 
-proxy.on('error', function() {
+proxy.on('error', () => {
     console.log('Could not connect to proxy, please try again...');
 });
 
-app.listen(port, function () {
-    console.log('Server running on port ' + port);
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });

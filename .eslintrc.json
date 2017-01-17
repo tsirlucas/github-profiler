@@ -1,0 +1,20 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "indent": ["error", 4],
+    "func-names": ["error", "never"],
+    "no-console": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": ["error", "never"],
+    "object-curly-spacing": "off"
+  },
+  "env": {
+    "jest": true
+  },
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import"
+  ]
+}
