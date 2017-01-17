@@ -22,6 +22,12 @@ To run the tests do:
 npm test
 ```
 
+## Running JSHint
+To run the JSHint do:
+```shellscript
+npm jshint
+```
+
 ## Building production
 To run production builder do:
 ```shellscript
