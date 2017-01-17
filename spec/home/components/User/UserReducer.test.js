@@ -1,5 +1,5 @@
-import reducer from '../../../../src/app/home/components/User/UserReducer'
-import * as types from '../../../../src/app/home/components/User/UserActionsTypes'
+import reducer from 'app/home/components/User/UserReducer'
+import * as types from 'app/home/components/User/UserActionsTypes'
 
 describe('User reducer', () => {
     it('should return the initial state', () => {

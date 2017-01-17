@@ -1,5 +1,5 @@
-import reducer from '../../../../src/app/home/components/Notes/NotesReducer'
-import * as types from '../../../../src/app/home/components/Notes/NotesActionsTypes'
+import reducer from 'app/home/components/Notes/NotesReducer'
+import * as types from 'app/home/components/Notes/NotesActionsTypes'
 
 describe('Notes reducer', () => {
     it('should return the initial state', () => {

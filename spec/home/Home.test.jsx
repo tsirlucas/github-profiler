@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import Home from '../../src/app/home/Home'
+import Home from 'app/home/Home'
 
 function setup() {
     const enzymeWrapper = shallow(<Home />);

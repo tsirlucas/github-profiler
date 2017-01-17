@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import Bonus from '../../src/app/bonus/Bonus'
+import Bonus from 'app/bonus/Bonus'
 
 function setup() {
     const enzymeWrapper = shallow(<Bonus />);

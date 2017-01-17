@@ -1,6 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import Template from '../../src/app/commons/Template'
+import Template from 'app/commons/Template'
 
 function setup() {
     const enzymeWrapper = shallow(<Template />);
