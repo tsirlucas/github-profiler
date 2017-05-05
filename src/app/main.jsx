@@ -1,24 +1,24 @@
 import React from 'react';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
-import {createStore, applyMiddleware} from 'redux';
-import reducers from './reducers';
+import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import Routes from './Routes'
-import injectTapEventPlugin from 'react-tap-event-plugin';
+//import injectTapEventPlugin from 'react-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import reducers from './reducers';
+import Routes from './Routes';
 
 require('../style/import.scss');
 
-injectTapEventPlugin();
+//injectTapEventPlugin();
 
 const store = createStore(reducers, applyMiddleware(thunk));
 
 ReactDOM.render(
-    <Provider store={store}>
-        <MuiThemeProvider>
-            <Routes />
-        </MuiThemeProvider>
-    </Provider>,
-    document.querySelector('#App')
+  <Provider store={store}>
+    <MuiThemeProvider>
+      <Routes />
+    </MuiThemeProvider>
+  </Provider>,
+  document.querySelector('#App')
 );

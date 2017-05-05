@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card, CardHeader, List, ListItem, TextField, FlatButton, Avatar, Divider} from 'material-ui';
-import {searchUserAction} from './UserActions';
-import {listNotes} from '../Notes/NotesActions'
+import searchUserAction from './UserActions';
+import {listNotesAction} from '../Notes/NotesActions'
 import is from 'is_js';
 
 export default class User extends React.Component {
@@ -35,7 +35,7 @@ export default class User extends React.Component {
         let store = this.context.store;
         if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
             store.dispatch(searchUserAction(this.state.userInput));
-            store.dispatch(listNotes(this.state.userInput));
+            store.dispatch(listNotesAction(this.state.userInput));
             this.state.userInput = '';
         }
     }

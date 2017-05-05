@@ -1,12 +1,19 @@
-const webpack = require('webpack');
-const path = require('path');
+import webpack from 'webpack';
+import path from 'path';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
+
 const buildPath = path.resolve(__dirname, 'build');
 const mainPath = path.resolve(__dirname, 'src', 'app', 'main.jsx');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-//NODE_ENV=production webpack -p --config webpack.production.config.js
+const browsersync = new BrowserSyncPlugin({
+    host: 'localhost',
+    port: 3000,
+    proxy: 'http://localhost:3100/'
+}, { reload: false });
 
 const config = {
+    devtool: 'eval',
     entry: {
         app: ['materialize-loader!./materialize.config.js', mainPath],
         vendor: ['preact']
@@ -26,6 +33,12 @@ const config = {
         },
         extensions: ['.js', '.jsx']
     },
+
+    devServer: {
+        hotOnly: true,
+        inline: true,
+        port: 3100
+    },
     module: {
         loaders: [
             {
@@ -44,6 +57,8 @@ const config = {
 
     },
     plugins: [
+        browsersync,
+        new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin({
             filename: 'styles.css',
             disable: false,
@@ -57,4 +72,4 @@ const config = {
     ]
 };
 
-module.exports = config;
+export default config;
