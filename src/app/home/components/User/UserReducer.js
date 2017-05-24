@@ -1,9 +1,9 @@
 import {SEARCH_USER} from './UserActionsTypes';
 
-const UserReducer = (state = {data: {user: {login: true}, repos: []}}, action) => {
-    switch (action.type) {
+const UserReducer = (state = {data: {user: {login: true}, repos: []}}, {payload, type}) => {
+    switch (type) {
         case SEARCH_USER:
-            return {data: {user: action.data[0], repos: action.data[1]}};
+            return {data: {user: payload.user, repos: payload.repos}};
         case SEARCH_USER + '_ERROR':
             return {data: {user: false, repos: []}};
         default:

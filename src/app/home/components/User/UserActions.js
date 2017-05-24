@@ -1,18 +1,13 @@
-import fetch from 'isomorphic-fetch';
-import { SEARCH_USER } from './UserActionsTypes';
+import {SEARCH_USER} from './UserActionsTypes';
+import {getUser, getRepos} from '../../../../helpers/github-api';
 
-export default searchText =>
-    dispatch => Promise.all([
-        fetch(`https://api.github.com/users/${searchText}`),
-        fetch(`https://api.github.com/users/${searchText}/repos?`)
-    ])
-        .then(responses => Promise.all(responses.map(response => response.json())))
-        .then(
-        (data) => {
-            if (!(data[0].message === 'Not Found' || data[1].message === 'Not Found')) {
-                dispatch({ type: SEARCH_USER, data });
-            } else {
-                dispatch({ type: SEARCH_USER + '_ERROR', data });
-            }
-        }
-        );
+export default searchText => {
+    let user, repos;
+    return dispatch => Promise.all([getUser(searchText), getRepos(searchText)])
+        .then(([user, repos]) =>
+            dispatch({type: SEARCH_USER, payload: {user, repos}}))
+        .catch((err) =>
+            dispatch({type: SEARCH_USER + '_ERROR', payload: {user, repos}}));
+}
+
+

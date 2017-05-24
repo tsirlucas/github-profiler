@@ -1,7 +1,6 @@
 import is from 'is_js';
 
 export default (data) => {
-    console.log(data);
     switch (true) {
         case is.array(data):
             return data.map(item => item ? {id: data.indexOf(item), text: item} : null)
