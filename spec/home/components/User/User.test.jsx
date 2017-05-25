@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import User from 'app/home/components/User/User'
+import User from 'app/home/components/user/user'
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from 'app/reducers';

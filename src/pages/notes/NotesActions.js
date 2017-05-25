@@ -1,5 +1,5 @@
 import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './NotesActionsTypes';
-import {addNote, editNote, removeNote, listNotes} from '../../../../../src/helpers/firebase-api';
+import {addNote, editNote, removeNote, listNotes} from '../../core/api/firebase-api';
 
 let nextActionId = 0;
 

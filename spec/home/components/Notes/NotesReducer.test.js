@@ -1,7 +1,7 @@
-import reducer from 'app/home/components/Notes/NotesReducer';
-import * as types from 'app/home/components/Notes/NotesActionsTypes';
+import reducer from 'app/home/components/notes/NotesReducer';
+import * as types from 'app/home/components/notes/NotesActionsTypes';
 
-describe('Notes reducer', () => {
+describe('notes reducer', () => {
     it('should return the initial state', () => {
         expect(
             reducer({notes: []}, {})

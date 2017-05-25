@@ -3,14 +3,14 @@ import { Provider } from 'react-redux';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-//import injectTapEventPlugin from 'react-tap-event-plugin';
+import injectTapEventPlugin from 'preact-tap-event-plugin';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import reducers from './reducers';
-import Routes from './Routes';
+import Routes from './routes';
 
-require('../style/import.scss');
+require('./style/import.scss');
 
-//injectTapEventPlugin();
+injectTapEventPlugin();
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

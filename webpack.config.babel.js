@@ -4,7 +4,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
 const buildPath = path.resolve(__dirname, 'build');
-const mainPath = path.resolve(__dirname, 'src', 'app', 'main.jsx');
+const mainPath = path.resolve(__dirname, 'src', 'main.js');
 
 const browsersync = new BrowserSyncPlugin({
     host: 'localhost',

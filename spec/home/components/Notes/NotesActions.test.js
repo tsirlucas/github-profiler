@@ -1,13 +1,13 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import * as actions from 'app/home/components/Notes/NotesActions';
-import * as types from 'app/home/components/Notes/NotesActionsTypes';
+import * as actions from 'app/home/components/notes/NotesActions';
+import * as types from 'app/home/components/notes/NotesActionsTypes';
 import nock from 'nock';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
-describe('Notes actions', () => {
+describe('notes actions', () => {
     afterEach(() => {
         nock.cleanAll();
     });

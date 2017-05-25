@@ -1,6 +1,8 @@
 import Template from './commons/Template';
-import Home from './home/Home';
-import Bonus from './bonus/Bonus';
+import Home from './pages/home/Home';
+import User from './pages/user/User';
+import Repos from './pages/repos/Repos';
+import Notes from './pages/notes/Notes';
 import React from 'react';
 import {Router, browserHistory} from 'react-router';
 
@@ -9,7 +11,9 @@ const routes = {
     component: Template,
     indexRoute: {component: Home},
     childRoutes: [
-        {component: Bonus, path: '/bonus'}
+        {component: User, path: '/user'},
+        {component: Repos, path: '/repos'},
+        {component: Notes, path: '/notes'}
     ]
 };
 

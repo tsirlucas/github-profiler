@@ -75,6 +75,7 @@
     "materialize-css": "^0.97.8",
     "preact": "^8.1.0",
     "preact-compat": "^3.16.0",
+    "preact-tap-event-plugin": "^0.1.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.8.1",
     "react-tap-event-plugin": "^2.0.1",
