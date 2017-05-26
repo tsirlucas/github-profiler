@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux';
-import UserReducer from './pages/user/UserReducer';
-import NotesReducer from './pages/notes/NotesReducer';
+import UserReducer from './core/user/user.reducer';
+import NotesReducer from './core/notes/notes.reducer';
 
 const reducers = combineReducers({
-    UserReducer,
-    NotesReducer
+    user: UserReducer,
+    notes: NotesReducer
 });
 
 export default reducers;

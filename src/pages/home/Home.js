@@ -1,7 +1,7 @@
 import {Component, h} from 'preact';
 import {bind} from 'decko';
-import searchUserAction from '../user/UserActions';
-import {listNotesAction} from '../notes/NotesActions'
+import searchUserAction from '../../core/user/user.actions';
+import {listNotesAction} from '../../core/notes/notes.actions'
 import is from 'is_js';
 import {history} from '../../routes';
 import {connect} from 'preact-redux';

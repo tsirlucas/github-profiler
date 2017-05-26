@@ -1,13 +1,14 @@
 //CSS
 
+$header-height: 70px;
+
 @import url('//storage.googleapis.com/code.getmdl.io/1.2.0/material.deep_purple-pink.min.css');
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 @import url('//fonts.googleapis.com/css?family=Roboto:400,500,700');
-@import "../../node_modules/font-awesome/css/font-awesome.min.css";
 @import "commons/navbar";
+@import "commons/template";
 @import "utilities/utilities";
 @import "pages/home";
 @import "pages/user";
 @import "pages/repos";
 @import "pages/notes";
-@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");

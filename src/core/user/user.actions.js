@@ -1,5 +1,5 @@
-import {SEARCH_USER} from './UserActionsTypes';
-import {getUser, getRepos} from '../../core/api/github-api';
+import {SEARCH_USER} from './user.constants';
+import {getUser, getRepos} from '../api';
 
 export default searchText => {
     let user, repos;
