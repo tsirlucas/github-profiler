@@ -3,22 +3,27 @@ import Home from './pages/home/Home';
 import User from './pages/user/User';
 import Repos from './pages/repos/Repos';
 import Notes from './pages/notes/Notes';
-import React from 'react';
-import {Router, browserHistory} from 'react-router';
+import {Component, h} from 'preact';
+import {Router, Route} from 'react-router'
+import createHistory from 'history/createBrowserHistory'
 
-const routes = {
-    path: '/',
-    component: Template,
-    indexRoute: {component: Home},
-    childRoutes: [
-        {component: User, path: '/user'},
-        {component: Repos, path: '/repos'},
-        {component: Notes, path: '/notes'}
-    ]
-};
+export const history = createHistory();
 
-export default class Routes extends React.Component {
+export default class Routes extends Component {
     render() {
-        return <Router history={browserHistory} routes={routes}/>;
+        return (
+            <Router history={history}>
+                <div>
+                    <Route path="/" component={Template}/>
+                    <div className="page">
+                        <Route exact path="/" component={Home}/>
+                        <Route path="/user" component={User}/>
+                        <Route path="/repos" component={Repos}/>
+                        <Route path="/notes" component={Notes}/>
+                    </div>
+                </div>
+            </Router>
+        )
     }
 }
+

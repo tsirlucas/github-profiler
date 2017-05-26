@@ -1,19 +1,21 @@
-import React from 'react';
-import {TextField, FlatButton} from 'material-ui';
+import {Component, h} from 'preact';
+import {bind} from 'decko';
 import searchUserAction from '../user/UserActions';
 import {listNotesAction} from '../notes/NotesActions'
 import is from 'is_js';
-import {browserHistory} from 'react-router';
+import {history} from '../../routes';
+import {connect} from 'preact-redux';
+import reducers from '../../reducers';
+import bindActions from '../../util/bindActions';
+import {Button} from 'preact-mdl';
 
-export default class Home extends React.Component {
+@connect(reducers, bindActions({searchUserAction, listNotesAction}))
+export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
             userInput: ''
         };
-
-        this.updateSearchText = this.updateSearchText.bind(this);
-        this.searchUser = this.searchUser.bind(this);
     }
 
     componentDidMount() {
@@ -27,17 +29,19 @@ export default class Home extends React.Component {
         this.unsubscribe();
     }
 
-    updateSearchText(e, text) {
-        this.setState({userInput: text.toLowerCase()});
+    @bind
+    updateSearchText(e) {
+        this.setState({userInput: e.target.value.toLowerCase()});
     }
 
+    @bind
     searchUser(e) {
         e.preventDefault();
         let store = this.context.store;
         if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
             store.dispatch(searchUserAction(this.state.userInput));
             store.dispatch(listNotesAction(this.state.userInput));
-            browserHistory.push('/user');
+            history.push('/user');
             this.state.userInput = '';
         }
     }
@@ -46,8 +50,8 @@ export default class Home extends React.Component {
         return (
             <div id='home'>
                 <form onSubmit={this.searchUser}>
-                    <TextField id='user-input' onChange={this.updateSearchText} value={this.state.userInput}/>
-                    <FlatButton label='Search' onClick={this.searchUser} disabled={this.state.userInput.trim().length <= 0}/>
+                    <input id='user-input' onInput={this.updateSearchText}/>
+                    <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Teste</Button>
                 </form>
             </div>
         )

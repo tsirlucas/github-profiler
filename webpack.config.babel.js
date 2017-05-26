@@ -10,7 +10,7 @@ const browsersync = new BrowserSyncPlugin({
     host: 'localhost',
     port: 3000,
     proxy: 'http://localhost:3100/'
-}, { reload: false });
+}, {reload: false});
 
 const config = {
     devtool: 'eval',
@@ -26,10 +26,8 @@ const config = {
 
     resolve: {
         alias: {
-            react: 'preact-compat',
-            'react-dom': 'preact-compat',
-            // Not necessary unless you consume a module using `createClass`
-            'create-react-class': 'preact-compat/lib/create-react-class'
+            'react': 'preact-compat',
+            'react-dom': 'preact-compat'
         },
         extensions: ['.js', '.jsx']
     },
@@ -43,15 +41,11 @@ const config = {
         loaders: [
             {
                 test: /\.jsx?$/,
-                exclude: /node_modules/,
+                include: [path.resolve('src'), path.resolve('node_modules/preact-compat/src')],
                 loader: 'babel-loader',
-                query: {
-                    presets: ['es2015', 'react'],
-                    plugins: ['react-hot-loader/babel']
-                }
             },
-            { test: /\.(png|woff|woff2|eot|ttf|svg|ico)$/, loader: 'url-loader?limit=100000' },
-            { test: /\.scss$/, loaders: ExtractTextPlugin.extract('css-loader!sass-loader') }
+            {test: /\.(png|woff|woff2|eot|ttf|svg|ico)$/, loader: 'url-loader?limit=100000'},
+            {test: /\.scss$/, loaders: ExtractTextPlugin.extract('css-loader!sass-loader')}
 
         ]
 

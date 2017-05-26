@@ -1,19 +1,20 @@
-import React from 'react';
-import {Card, CardHeader, List, ListItem, TextField, FlatButton, Snackbar, IconButton} from 'material-ui';
+import {h, Component} from 'preact';
+import {List, ListItem, Button} from 'preact-mdl';
 import {addNoteAction, removeNoteAction, editNoteAction, listNotesAction} from './NotesActions';
 import is from 'is_js';
 
-export default class Notes extends React.Component {
+import {connect} from 'preact-redux';
+import reducers from '../../reducers';
+import bindActions from '../../util/bindActions';
+import {bind} from 'decko';
+
+@connect(reducers, bindActions({addNoteAction, removeNoteAction, editNoteAction, listNotesAction}))
+export default class Notes extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userInput: ''
     };
-
-    this.handleUpdateInput = this.handleUpdateInput.bind(this);
-    this.addNoteHandler = this.addNoteHandler.bind(this);
-    this.removeNoteHandler = this.removeNoteHandler.bind(this);
-    this.editNoteHandler = this.editNoteHandler.bind(this);
   }
 
   componentWillMount() {
@@ -33,10 +34,12 @@ export default class Notes extends React.Component {
     this.unsubscribe();
   }
 
-  handleUpdateInput(ev, text) {
-    this.setState({userInput: text});
+  @bind
+  handleUpdateInput(ev) {
+    this.setState({userInput: ev.target.value});
   }
 
+  @bind
   addNoteHandler(e) {
     e.preventDefault();
     let store = this.context.store;
@@ -48,6 +51,7 @@ export default class Notes extends React.Component {
     }
   };
 
+  @bind
   removeNoteHandler(e, note) {
     e.stopPropagation();
     let store = this.context.store;
@@ -58,6 +62,7 @@ export default class Notes extends React.Component {
     }
   };
 
+  @bind
   editNoteHandler(note, text) {
     let store = this.context.store;
     let state = store.getState();
@@ -87,57 +92,31 @@ export default class Notes extends React.Component {
   }
 }
 
-Notes.contextTypes = {
-  store: React.PropTypes.object
-};
-
 const NotesTemplate = ({notes, addNoteHandler, handleUpdateInput, removeNoteHandler, editNoteHandler, invalidUsername, userInput, user}) => (
-  <Card>
-    <CardHeader title='Notes'
-                subtitle='Click on item to edit'
-    />
+  <div id='notes'>
     <List className="notes-list">
       {notes.map((note) => {
         return <ListItem
-          key={notes.indexOf(note)}
-          rightIconButton={
-            <IconButton onClick={(e) => removeNoteHandler(e, note)} iconClassName='fa fa-times'/>
-          }
-          secondaryText={<span>{note.text}</span>}
-          primaryTogglesNestedList={true}
-          secondaryTextLines={2}
-          nestedItems={[
-            <ListItem className="notes-item"
-                      hoverColor='white'
-                      key={1}
-                      value={2}
-                      children={[<EditForm editNoteHandler={editNoteHandler} note={note}/>]}
-            />
-          ]}
-        />
+          // rightIconButton={
+          //   <IconButton onClick={(e) => removeNoteHandler(e, note)} iconClassName='fa fa-times'/>
+          // }
+        >
+          <h5>{note.text}</h5>
+        </ListItem>
       })}
     </List>
     <div className='center-align'>
       <NotesForm addNoteHandler={addNoteHandler} handleUpdateInput={handleUpdateInput}
                  invalidUsername={invalidUsername} userInput={userInput} user={user}/>
     </div>
-  </Card>
+  </div>
 );
 
 const NotesForm = ({handleUpdateInput, addNoteHandler, invalidUsername, userInput, user}) => (
   <form onSubmit={addNoteHandler}>
-    <TextField id='user-input' onChange={handleUpdateInput} value={userInput}
-               disabled={invalidUsername || user === true}/>
-    <FlatButton label='Add' onClick={addNoteHandler}
+    <input id='user-input' onInput={handleUpdateInput} value={userInput}
+           disabled={invalidUsername || user === true}/>
+    <Button label='Add' onClick={addNoteHandler}
                 disabled={invalidUsername || user === true || userInput.trim().length <= 0}/>
-    <Snackbar
-      open={invalidUsername}
-      message="INVALID USERNAME!"
-      autoHideDuration={3000}
-    />
   </form>
-);
-
-const EditForm = ({editNoteHandler, note}) => (
-  <TextField id='user-input' onChange={(ev, text) => editNoteHandler(note, text)}/>
 );

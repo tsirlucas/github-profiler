@@ -1,6 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
-import Notes from '../../../../src/pages/notes/Notes.jsx'
+import Notes from '../../../../src/pages/notes/Notes.js'
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import reducers from 'app/reducers';

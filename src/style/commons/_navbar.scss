@@ -1,0 +1,17 @@
+.mdl-layout__header {
+    //display: block;
+}
+
+.mdl-layout__tab-panel {
+    display: inline !important;
+    margin-left: auto;
+
+    .mdl-layout__tab {
+        cursor: pointer;
+    }
+}
+
+.mdl-layout__container {
+    height: 56px;
+}
+
