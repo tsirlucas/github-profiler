@@ -8,6 +8,7 @@ import {isUserDefined} from '../../core/user/user.helper';
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
 import {getCurrentState, store} from '../../store';
+import NoUser from '../../commons/NoUser';
 
 @connect(reducers, bindActions({addNoteAction, removeNoteAction, editNoteAction, listNotesAction}))
 export default class Notes extends Component {
@@ -65,25 +66,25 @@ export default class Notes extends Component {
 
     render({notes}, {userInput}) {
         let {user} = getCurrentState();
-        return (
-            <div id='notes'>
-                <div className='notes-list'>
-                    <List>
-                        {notes.map((note) => {
-                            return <ListItem>
-                                <div className='note-item'>
-                                    <h5>{note.text}</h5>
-                                    <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
-                                </div>
-                            </ListItem>
-                        })}
-                    </List>
-                </div>
-                <div className='center-align'>
-                    <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
-                               userInput={userInput} user={user}/>
-                </div>
-            </div>
+        return (user.login ?
+                <div id='notes'>
+                    <div className='notes-list'>
+                        <List>
+                            {notes.map((note) => {
+                                return <ListItem>
+                                    <div className='note-item'>
+                                        <h5>{note.text}</h5>
+                                        <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
+                                    </div>
+                                </ListItem>
+                            })}
+                        </List>
+                    </div>
+                    <div className='center-align'>
+                        <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
+                                   userInput={userInput} user={user}/>
+                    </div>
+                </div> : <NoUser/>
         )
     }
 }

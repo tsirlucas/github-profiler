@@ -11,12 +11,12 @@ export default class Navbar extends Component {
     }
     @bind
     syncState({getState}) {
-        const {route} = getState();
-        this.setState({path: route.path});
+        const {route, user} = getState();
+        this.setState({path: route.path, user: user.login});
     }
 
     componentWillMount() {
-        this.syncState(store)
+        this.syncState(store);
         this.unsubscribe = store.subscribe(() => this.syncState(store));
     }
 

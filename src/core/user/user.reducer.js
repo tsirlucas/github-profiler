@@ -1,6 +1,6 @@
 import {SEARCH_USER} from './user.constants';
 
-const UserReducer = (state = {login: true, repos: []}, {payload, type}) => {
+const UserReducer = (state = {login: false, repos: []}, {payload, type}) => {
     switch (type) {
         case SEARCH_USER:
             return {

@@ -1,6 +1,7 @@
 import {h, Component} from 'preact';
 
 import {getCurrentState} from '../../store';
+import NoUser from '../../commons/NoUser';
 
 export default class User extends Component {
     componentDidMount() {
@@ -28,14 +29,15 @@ export default class User extends Component {
             blog: 'Blog'
         };
 
-        return (
-            <div id='user'>
-                <div className="avatar-container">
-                    <Avatar src={user.avatar_url}/>
-                    <h3>{user.login}</h3>
-                </div>
-                <UserInfo user={user} userLabels={userLabels}/>
-            </div>
+        return (user.login ?
+                <div id='user'>
+                    <div className="avatar-container">
+                        <Avatar src={user.avatar_url}/>
+                        <h3>{user.login}</h3>
+                    </div>
+
+                    < UserInfo user={user} userLabels={userLabels}/>
+                </div> : <NoUser/>
         )
     }
 }
