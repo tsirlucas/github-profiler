@@ -4,11 +4,11 @@ import {Button} from 'preact-mdl';
 import is from 'is_js';
 import {connect} from 'preact-redux';
 
-import {history} from '../../routes';
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
 import searchUserAction from '../../core/user/user.actions';
 import {listNotesAction} from '../../core/notes/notes.actions'
+import {dispatchChangeRoute} from '../../core/router/router.service';
 
 @connect(reducers, bindActions({searchUserAction, listNotesAction}))
 export default class Home extends Component {
@@ -42,7 +42,7 @@ export default class Home extends Component {
         if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
             store.dispatch(searchUserAction(this.state.userInput));
             store.dispatch(listNotesAction(this.state.userInput));
-            history.push('/user');
+            dispatchChangeRoute('/user');
             this.state.userInput = '';
         }
     }
