@@ -35,7 +35,8 @@ const config = {
     devServer: {
         hotOnly: true,
         inline: true,
-        port: 3100
+        port: 3100,
+        historyApiFallback: true
     },
     module: {
         loaders: [

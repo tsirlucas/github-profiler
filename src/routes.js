@@ -39,10 +39,12 @@ export default class Routes extends Component {
     componentWillMount() {
         this.onEnter();
         this.unsubscribe = store.subscribe(() => this.syncState(store));
+        this.unlisten = history.listen(() => this.onEnter());
     }
 
     componentDidUnmount() {
         this.unsubscribe();
+        this.unlisten();
     }
 
     render() {
