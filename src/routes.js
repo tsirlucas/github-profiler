@@ -1,7 +1,7 @@
 import {Component, h} from 'preact';
 import {bind} from 'decko';
 import {Router, Route} from 'react-router'
-import createHistory from 'history/createBrowserHistory'
+import createHistory from 'history/createHashHistory'
 
 import {store} from './store';
 import Template from './commons/Template';
@@ -17,8 +17,9 @@ export default class Routes extends Component {
     @bind
     onEnter() {
         const nextURL = store.getState().route.path;
-        if (window.location.pathname !== nextURL) {
-            dispatchChangeRoute(window.location.pathname);
+        const currURL = window.location.hash.slice(1);
+        if (currURL !== nextURL) {
+            dispatchChangeRoute(currURL);
         }
     }
 
