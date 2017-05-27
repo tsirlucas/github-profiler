@@ -1,5 +1,6 @@
-import Navbar from './navbar/Navbar';
 import {Component, h} from 'preact';
+
+import Navbar from './navbar/Navbar';
 
 export default class App extends Component {
   render() {

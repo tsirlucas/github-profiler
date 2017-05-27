@@ -1,4 +1,5 @@
 import {h, Component} from 'preact';
+
 import {getCurrentState} from '../../store';
 
 export default class User extends Component {

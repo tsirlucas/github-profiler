@@ -13,7 +13,7 @@ export const addNoteAction = (note, user) =>
 
 export const removeNoteAction = (note, user) =>
     dispatch => removeNote(user, note)
-        .then(() => dispatch({type: REMOVE_NOTE, payload: note}));
+        .then(() => dispatch({type: REMOVE_NOTE, payload: {note}}));
 
 export const editNoteAction = (note, text, user) =>
     dispatch => editNote(user, {[note.id]: text})

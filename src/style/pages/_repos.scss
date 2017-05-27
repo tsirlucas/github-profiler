@@ -1,7 +1,11 @@
 #repos {
     ul li {
-        div {
+        .pinned-repo-item {
+            border-radius: 3px;
+            padding: 16px;
+            border: 1px #d1d5da solid;
             width: 100%;
+            cursor: pointer;
             h5 {
                 width: 100%;
                 text-align: center;

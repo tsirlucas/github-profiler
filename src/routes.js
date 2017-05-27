@@ -1,11 +1,12 @@
+import {Component, h} from 'preact';
+import {Router, Route} from 'react-router'
+import createHistory from 'history/createBrowserHistory'
+
 import Template from './commons/Template';
 import Home from './pages/home/Home';
 import User from './pages/user/User';
 import Repos from './pages/repos/Repos';
 import Notes from './pages/notes/Notes';
-import {Component, h} from 'preact';
-import {Router, Route} from 'react-router'
-import createHistory from 'history/createBrowserHistory'
 
 export const history = createHistory();
 

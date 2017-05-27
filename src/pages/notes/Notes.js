@@ -1,13 +1,12 @@
 import {h, Component} from 'preact';
-import {List, ListItem, Button} from 'preact-mdl';
+import {connect} from 'preact-redux';
+import {bind} from 'decko';
+import {List, ListItem, Button, Icon} from 'preact-mdl';
+
 import {addNoteAction, removeNoteAction, editNoteAction, listNotesAction} from '../../core/notes/notes.actions';
 import {isUserDefined} from '../../core/user/user.helper';
-import is from 'is_js';
-
-import {connect} from 'preact-redux';
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
-import {bind} from 'decko';
 import {getCurrentState, store} from '../../store';
 
 @connect(reducers, bindActions({addNoteAction, removeNoteAction, editNoteAction, listNotesAction}))
@@ -42,7 +41,7 @@ export default class Notes extends Component {
     @bind
     addNoteHandler(e) {
         e.preventDefault();
-        let {user} = getCurrentState();
+        const {user} = getCurrentState();
         if (isUserDefined() && this.state.userInput.trim().length > 0) {
             store.dispatch(addNoteAction(this.state.userInput, user.login.toLowerCase()));
             this.setState({userInput: ''})
@@ -50,8 +49,8 @@ export default class Notes extends Component {
     };
 
     @bind
-    removeNoteHandler(e, note) {
-        e.stopPropagation();
+    removeNoteHandler(note) {
+        const {user} = getCurrentState();
         if (isUserDefined()) {
             store.dispatch(removeNoteAction(note, user.login.toLowerCase()));
         }
@@ -70,12 +69,11 @@ export default class Notes extends Component {
             <div id='notes'>
                 <List className="notes-list">
                     {notes.map((note) => {
-                        return <ListItem
-                            // rightIconButton={
-                            //   <IconButton onClick={(e) => removeNoteHandler(e, note)} iconClassName='fa fa-times'/>
-                            // }
-                        >
-                            <h5>{note.text}</h5>
+                        return <ListItem>
+                            <div className='note-item'>
+                                <h5>{note.text}</h5>
+                                <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
+                            </div>
                         </ListItem>
                     })}
                 </List>
@@ -90,9 +88,9 @@ export default class Notes extends Component {
 
 const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
-        <input id='user-input' onInput={handleUpdateInput} value={userInput}
+        <input className='notes-input' onInput={handleUpdateInput} value={userInput}
                disabled={!isUserDefined()}/>
         <Button label='Add' type="submit"
-                disabled={!isUserDefined() || userInput.trim().length <= 0}/>
+                disabled={!isUserDefined() || userInput.trim().length <= 0}>Add</Button>
     </form>
 );

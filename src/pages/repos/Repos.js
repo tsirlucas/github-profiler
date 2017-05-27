@@ -1,5 +1,6 @@
 import {h, Component} from 'preact';
 import {List, ListItem} from 'preact-mdl';
+
 import {store, getCurrentState} from '../../store';
 
 export default class Repos extends Component {
@@ -23,7 +24,7 @@ export default class Repos extends Component {
                             onClick={() => window.open(repo.html_url, '_blank')}
                             key={repos.indexOf(repo)}
                         >
-                            <div>
+                            <div className='pinned-repo-item'>
                                 <h5>{repo.name}</h5>
                                 <p>{repo.description}</p>
                             </div>

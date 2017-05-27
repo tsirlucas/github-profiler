@@ -1,13 +1,14 @@
 import {Component, h} from 'preact';
 import {bind} from 'decko';
-import searchUserAction from '../../core/user/user.actions';
-import {listNotesAction} from '../../core/notes/notes.actions'
+import {Button} from 'preact-mdl';
 import is from 'is_js';
-import {history} from '../../routes';
 import {connect} from 'preact-redux';
+
+import {history} from '../../routes';
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
-import {Button} from 'preact-mdl';
+import searchUserAction from '../../core/user/user.actions';
+import {listNotesAction} from '../../core/notes/notes.actions'
 
 @connect(reducers, bindActions({searchUserAction, listNotesAction}))
 export default class Home extends Component {
@@ -50,8 +51,8 @@ export default class Home extends Component {
         return (
             <div id='home'>
                 <form onSubmit={this.searchUser}>
-                    <input id='user-input' onInput={this.updateSearchText}/>
-                    <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Teste</Button>
+                    <input id='user-input' onInput={this.updateSearchText} placeholder='Username'/>
+                    <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Search</Button>
                 </form>
             </div>
         )

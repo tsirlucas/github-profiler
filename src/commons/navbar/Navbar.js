@@ -1,6 +1,7 @@
 import {h, Component} from 'preact';
-import {history} from '../../routes';
 import {Layout, LayoutHeader, LayoutTab} from 'preact-mdl';
+
+import {history} from '../../routes';
 
 export default class Navbar extends Component {
   constructor(props) {
