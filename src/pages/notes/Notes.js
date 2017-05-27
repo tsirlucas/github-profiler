@@ -67,16 +67,18 @@ export default class Notes extends Component {
         let {user} = getCurrentState();
         return (
             <div id='notes'>
-                <List className="notes-list">
-                    {notes.map((note) => {
-                        return <ListItem>
-                            <div className='note-item'>
-                                <h5>{note.text}</h5>
-                                <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
-                            </div>
-                        </ListItem>
-                    })}
-                </List>
+                <div className='notes-list'>
+                    <List>
+                        {notes.map((note) => {
+                            return <ListItem>
+                                <div className='note-item'>
+                                    <h5>{note.text}</h5>
+                                    <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
+                                </div>
+                            </ListItem>
+                        })}
+                    </List>
+                </div>
                 <div className='center-align'>
                     <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
                                userInput={userInput} user={user}/>
@@ -89,7 +91,7 @@ export default class Notes extends Component {
 const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
         <input className='notes-input' onInput={handleUpdateInput} value={userInput}
-               disabled={!isUserDefined()}/>
+               disabled={!isUserDefined()} placeholder='Type your note'/>
         <Button label='Add' type="submit"
                 disabled={!isUserDefined() || userInput.trim().length <= 0}>Add</Button>
     </form>

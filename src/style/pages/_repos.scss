@@ -1,4 +1,10 @@
 #repos {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 100%;
     ul li {
         .pinned-repo-item {
             border-radius: 3px;

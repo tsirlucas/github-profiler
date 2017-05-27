@@ -1,16 +1,26 @@
-.avatar-container {
-    padding-top: 20px;
+#user {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    right: 0;
+    overflow-y: scroll;
+    width: 100%;
 
-    img {
-        width: 25%;
-        border-radius: 50%;
-        margin: 0 auto;
-        display: block;
-        margin-bottom: 20px;
+    .avatar-container {
+        padding-top: 20px;
+
+        img {
+            width: 25%;
+            border-radius: 50%;
+            margin: 0 auto;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
     }
 
-    h3 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
 }

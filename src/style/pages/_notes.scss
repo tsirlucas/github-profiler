@@ -1,40 +1,49 @@
 #notes {
-    .note-item {
-        border-radius: 3px;
-        padding: 16px;
-        border: 1px #d1d5da solid;
+    .notes-list {
+        position: fixed;
+        top: 70px;
+        bottom: 50px;
+        right: 0;
+        overflow-y: scroll;
         width: 100%;
-        position: relative;
+        .note-item {
+            border-radius: 3px;
+            padding: 16px;
+            border: 1px #d1d5da solid;
+            width: 100%;
+            position: relative;
 
-        i {
-            cursor: pointer;
-            position: absolute;
-            top:5px;
-            right: 5px;
+            i {
+                cursor: pointer;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+            }
         }
     }
     form {
         width: 100%;
+        height: 50px;
+        outline: none;
+        vertical-align: middle;
+        display: block;
+        bottom: 0;
+        right: 0;
+        position: fixed;
         .notes-input {
-            height: 50px;
-            padding: 0 16px;
-            outline: none;
-            vertical-align: middle;
-            width: 85%;
             display: block;
+            padding: 0 16px;
+            width: 60vw;
             position: fixed;
-            bottom: 0;
-            margin: 0;
+            right: 27vw;
         }
         button {
-            height: 50px;
-            outline: none;
-            vertical-align: middle;
-            width: 15%;
-            display: block;
             position: fixed;
-            bottom: 0;
-            right: 0;
+            right: 5vw;
+            outline: none;
+            width: 12vw;
+            background-color: black;
+            color: white;
         }
     }
 }
