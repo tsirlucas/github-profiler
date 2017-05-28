@@ -3,12 +3,14 @@
 $header-height: 70px;
 $github-black: rgb(36, 41, 46);
 
-@import url('//storage.googleapis.com/code.getmdl.io/1.2.0/material.deep_purple-pink.min.css');
+@import url('../../node_modules/material-design-lite/dist/material.deep_purple-pink.min.css');
 @import url('//fonts.googleapis.com/icon?family=Material+Icons');
 @import url('//fonts.googleapis.com/css?family=Roboto:400,500,700');
 @import "commons/navbar";
 @import "commons/template";
 @import "commons/no-user";
+@import "commons/lists";
+@import "commons/buttons";
 @import "utilities/utilities";
 @import "pages/home";
 @import "pages/user";

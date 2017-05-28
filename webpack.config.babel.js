@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
+import DashboardPlugin from 'webpack-dashboard/plugin';
 
 const buildPath = path.resolve(__dirname, 'github-profiler');
 const mainPath = path.resolve(__dirname, 'src', 'main.js');
@@ -15,7 +16,7 @@ const browsersync = new BrowserSyncPlugin({
 const config = {
     devtool: 'eval',
     entry: {
-        app: ['materialize-loader!./materialize.config.js', mainPath],
+        app: [mainPath],
         vendor: ['preact']
     },
     output: {
@@ -52,6 +53,7 @@ const config = {
 
     },
     plugins: [
+        new DashboardPlugin(),
         browsersync,
         new webpack.HotModuleReplacementPlugin(),
         new ExtractTextPlugin({

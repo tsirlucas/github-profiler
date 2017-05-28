@@ -12,7 +12,7 @@ const mainPath = path.resolve(__dirname, 'src', 'main.js');
 
 const config = {
     entry: {
-        app: ['materialize-loader!./materialize.config.js', mainPath],
+        app: [mainPath],
         vendor: ['preact']
     },
     output: {
