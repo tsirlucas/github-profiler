@@ -1,5 +1,7 @@
 #Github Profiler
-An application where you can search for Github users and add/edit/remove notes for each one
+An PWA where you can search for Github users and add/edit/remove notes for each one
+
+//TODO EDIT NOTE
 
 ## Setup
 First install the node and npm requirements and make a symbolic link to nodejs
