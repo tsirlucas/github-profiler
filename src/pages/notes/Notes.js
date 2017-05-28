@@ -66,7 +66,6 @@ export default class Notes extends Component {
 
     render({notes}, {userInput}) {
         let {user} = getCurrentState();
-        console.log(notes, 'aqui luca')
         return (user.login ?
                 <div id='notes'>
                     <div className='notes-list'>

@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import path from 'path';
 import glob from 'glob';
+import fs from 'fs';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import SWPrecache from 'sw-precache-webpack-plugin';
 import PurifyCSSPlugin from 'purifycss-webpack';
@@ -81,6 +82,7 @@ const config = {
             template: 'prod-index.html',
             filename: 'index.html',
             inject: false,
+            style: fs.readFileSync('github-profiler/styles.css', 'utf8'),
             excludeChunks: ['admin']
         }),
         new CopyWebpackPlugin([
