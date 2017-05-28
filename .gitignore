@@ -3,7 +3,7 @@ src/style/**/*.css
 *.log
 debug/
 node_modules/
-build/
+github-profiler/
 
 # Intellij
 .idea/
