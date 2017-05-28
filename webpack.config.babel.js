@@ -3,7 +3,7 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import BrowserSyncPlugin from 'browser-sync-webpack-plugin';
 
-const buildPath = path.resolve(__dirname, 'build');
+const buildPath = path.resolve(__dirname, 'github-profiler');
 const mainPath = path.resolve(__dirname, 'src', 'main.js');
 
 const browsersync = new BrowserSyncPlugin({
@@ -21,7 +21,7 @@ const config = {
     output: {
         path: buildPath,
         filename: '[name].js',
-        publicPath: '/build'
+        publicPath: '/github-profiler/'
     },
 
     resolve: {

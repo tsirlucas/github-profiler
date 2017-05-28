@@ -48,8 +48,8 @@ export default class Home extends Component {
     render() {
         return (
             <div id='home'>
-                <form onSubmit={this.searchUser}>
-                    <input id='user-input' onInput={this.updateSearchText} placeholder='Username'/>
+                <form id='search-user' onSubmit={this.searchUser}>
+                    <input id='user-input' onInput={this.updateSearchText} placeholder='Username' aria-label='username'/>
                     <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Search</Button>
                 </form>
             </div>
