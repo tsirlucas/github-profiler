@@ -6,10 +6,10 @@ import {connect} from 'preact-redux';
 
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
-import searchUserAction from '../../core/user/user.actions';
+import {searchUser} from '../../core/user/user.actions';
 import {listNotesAction} from '../../core/notes/notes.actions'
 
-@connect(reducers, bindActions({searchUserAction, listNotesAction}))
+@connect(reducers, bindActions({searchUser, listNotesAction}))
 export default class Home extends Component {
     constructor(props) {
         super(props);
@@ -37,10 +37,9 @@ export default class Home extends Component {
     @bind
     searchUser(e) {
         e.preventDefault();
-        let store = this.context.store;
         if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
-            store.dispatch(searchUserAction(this.state.userInput));
-            store.dispatch(listNotesAction(this.state.userInput));
+            this.props.searchUser(this.state.userInput);
+            //this.props.listNotesAction(this.state.userInput);
             this.state.userInput = '';
         }
     }
@@ -49,7 +48,7 @@ export default class Home extends Component {
         return (
             <div id='home'>
                 <form id='search-user' onSubmit={this.searchUser}>
-                    <input id='user-input' onInput={this.updateSearchText} placeholder='Username' aria-label='username'/>
+                    <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username' aria-label='username'/>
                     <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Search</Button>
                 </form>
             </div>

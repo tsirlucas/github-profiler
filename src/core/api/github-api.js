@@ -1,7 +1,10 @@
-import fetch from 'isomorphic-fetch';
+import {ajax} from 'rxjs/observable/dom/ajax';
 
 export default (searchText ,path = '') => {
     const apiUrl = `https://api.github.com/users/${searchText}`;
-    return fetch(apiUrl + path)
-        .then((response) => response.json());
+    return ajax({
+        method: 'get',
+        url: apiUrl + path,
+        responseType: 'json'
+    });
 };

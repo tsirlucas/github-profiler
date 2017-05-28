@@ -3,14 +3,14 @@ import {connect} from 'preact-redux';
 import {bind} from 'decko';
 import {List, ListItem, Button, Icon} from 'preact-mdl';
 
-import {addNoteAction, removeNoteAction, editNoteAction, listNotesAction} from '../../core/notes/notes.actions';
+import {addNote, removeNote, editNote, listNotes} from '../../core/notes/notes.actions';
 import {isUserDefined} from '../../core/user/user.helper';
 import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
 import {getCurrentState, store} from '../../store';
 import NoUser from '../../commons/NoUser';
 
-@connect(reducers, bindActions({addNoteAction, removeNoteAction, editNoteAction, listNotesAction}))
+@connect(reducers, bindActions({addNote, removeNote, editNote, listNotes}))
 export default class Notes extends Component {
     constructor(props) {
         super(props);
@@ -21,7 +21,7 @@ export default class Notes extends Component {
 
     componentWillMount() {
         let {user} = getCurrentState();
-        store.dispatch(listNotesAction(user.login))
+        this.props.listNotes(user.login)
     }
 
     componentDidMount() {
@@ -44,7 +44,7 @@ export default class Notes extends Component {
         e.preventDefault();
         const {user} = getCurrentState();
         if (isUserDefined() && this.state.userInput.trim().length > 0) {
-            store.dispatch(addNoteAction(this.state.userInput, user.login.toLowerCase()));
+            this.props.addNote(this.state.userInput, user.login.toLowerCase());
             this.setState({userInput: ''})
         }
     };
@@ -53,19 +53,20 @@ export default class Notes extends Component {
     removeNoteHandler(note) {
         const {user} = getCurrentState();
         if (isUserDefined()) {
-            store.dispatch(removeNoteAction(note, user.login.toLowerCase()));
+            this.props.removeNote(note, user.login.toLowerCase());
         }
     };
 
     @bind
     editNoteHandler(note, text) {
         if (isUserDefined()) {
-            store.dispatch(editNoteAction(note, text, user.login));
+            this.props.editNote(note, text, user.login);
         }
     };
 
     render({notes}, {userInput}) {
         let {user} = getCurrentState();
+        console.log(notes, 'aqui luca')
         return (user.login ?
                 <div id='notes'>
                     <div className='notes-list'>
@@ -91,7 +92,7 @@ export default class Notes extends Component {
 
 const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
-        <input className='notes-input' onInput={handleUpdateInput} value={userInput}
+        <input className='notes-input' type="text" onInput={handleUpdateInput} value={userInput}
                disabled={!isUserDefined()} placeholder='Type your note'/>
         <Button label='Add' type="submit"
                 disabled={!isUserDefined() || userInput.trim().length <= 0}>Add</Button>

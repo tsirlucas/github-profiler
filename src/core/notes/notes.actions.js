@@ -1,20 +1,26 @@
-import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './notes.constants';
-import {addNote, editNote, removeNote, listNotes} from '../api';
+import {
+    LIST_NOTES,
+    RESOLVE_LIST_NOTES,
+    ADD_NOTE,
+    RESOLVE_ADD_NOTE,
+    REMOVE_NOTE,
+    RESOLVE_REMOVE_NOTE,
+    EDIT_NOTE,
+    RESOLVE_EDIT_NOTE
+} from './notes.constants';
 
-let nextActionId = 0;
+export const listNotes = user => ({type: LIST_NOTES, payload: {user}});
 
-export const listNotesAction = user =>
-    dispatch => listNotes(user)
-        .then(data => dispatch({type: LIST_NOTES, payload: data}));
+export const resolveListNotes = payload => ({type: RESOLVE_LIST_NOTES, payload});
 
-export const addNoteAction = (note, user) =>
-    dispatch => addNote(user, {[nextActionId]: note})
-        .then(() => dispatch({type: ADD_NOTE, payload: {note: {id: nextActionId++, text: note}}}));
+export const addNote = (note, user) => ({type: ADD_NOTE, payload: {note, user}});
 
-export const removeNoteAction = (note, user) =>
-    dispatch => removeNote(user, note)
-        .then(() => dispatch({type: REMOVE_NOTE, payload: {note}}));
+export const resolveAddNotes = payload => ({type: RESOLVE_ADD_NOTE, payload});
 
-export const editNoteAction = (note, text, user) =>
-    dispatch => editNote(user, {[note.id]: text})
-        .then(() => dispatch({type: EDIT_NOTE, payload: {note: note, text: text}}));
+export const removeNote = (note, user) => ({type: REMOVE_NOTE, payload: {note, user}});
+
+export const resolveRemoveNote = (note) => ({type: RESOLVE_REMOVE_NOTE, payload: {note}});
+
+export const editNote = (note, text, user) => ({type: EDIT_NOTE, payload: {note, text, user}});
+
+export const resolveEditNote = (note, text) => ({type: RESOLVE_EDIT_NOTE, payload: {note, text}});
