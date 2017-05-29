@@ -10,12 +10,12 @@
     "theme_color": "#24292E",
     "icons": [
         {
-            "src": "/assets/github-fluid-icon.png",
+            "src": "/github-profiler/assets/github-fluid-icon.png",
             "type": "image/png",
             "sizes": "192x192"
         },
         {
-            "src": "/assets/github-fluid-icon.png",
+            "src": "/github-profiler/assets/github-fluid-icon.png",
             "type": "image/png",
             "sizes": "512x512"
         }
