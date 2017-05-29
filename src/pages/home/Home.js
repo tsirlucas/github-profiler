@@ -19,6 +19,7 @@ export default class Home extends Component {
     }
 
     componentDidMount() {
+        this.setState({userInput: ''});
         let store = this.context.store;
         this.unsubscribe = store.subscribe(() => {
             this.forceUpdate()
@@ -48,7 +49,7 @@ export default class Home extends Component {
         return (
             <div id='home'>
                 <form id='search-user' onSubmit={this.searchUser}>
-                    <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username' aria-label='username'/>
+                    <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username' value={this.state.userInput} aria-label='username'/>
                     <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Search</Button>
                 </form>
             </div>

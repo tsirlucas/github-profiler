@@ -92,7 +92,7 @@ export default class Notes extends Component {
 const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
         <input className='notes-input' type="text" onInput={handleUpdateInput} value={userInput}
-               disabled={!isUserDefined()} placeholder='Type your note'/>
+               disabled={!isUserDefined()} placeholder='Type your note' aria-label='add-note'/>
         <Button label='Add' type="submit"
                 disabled={!isUserDefined() || userInput.trim().length <= 0}>Add</Button>
     </form>
