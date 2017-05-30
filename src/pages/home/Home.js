@@ -1,6 +1,5 @@
 import {Component, h} from 'preact';
 import {bind} from 'decko';
-import {Button} from 'preact-mdl';
 import is from 'is_js';
 import {connect} from 'preact-redux';
 
@@ -49,8 +48,12 @@ export default class Home extends Component {
         return (
             <div id='home'>
                 <form id='search-user' onSubmit={this.searchUser}>
-                    <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username' value={this.state.userInput} aria-label='username'/>
-                    <Button type='submit' disabled={this.state.userInput.trim().length <= 0}>Search</Button>
+                    <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username'
+                           value={this.state.userInput} aria-label='username'/>
+                    <button
+                        class={`mdl-button mdl-js-ripple-effect mdl-js-button ${this.state.userInput.trim().length <= 0 ? 'mdl-button--disabled' : null}`}
+                        type='submit' disabled={this.state.userInput.trim().length <= 0}>Search
+                    </button>
                 </form>
             </div>
         )

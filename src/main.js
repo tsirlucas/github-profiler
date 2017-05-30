@@ -4,7 +4,6 @@ import {Provider} from 'preact-redux';
 import {store} from './store';
 import Routes from './routes';
 
-import 'material-design-lite/material.min.js';
 import './style/import.scss';
 
 const init = () => {

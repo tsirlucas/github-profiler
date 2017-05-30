@@ -1,7 +1,6 @@
 import {h, Component} from 'preact';
 import {connect} from 'preact-redux';
 import {bind} from 'decko';
-import {List, ListItem, Button, Icon} from 'preact-mdl';
 
 import {addNote, removeNote, editNote, listNotes} from '../../core/notes/notes.actions';
 import {isUserDefined} from '../../core/user/user.helper';
@@ -69,16 +68,17 @@ export default class Notes extends Component {
         return (user.login ?
                 <div id='notes'>
                     <div className='notes-list'>
-                        <List>
+                        <ul className="mdl-list repos-list">
                             {notes.map((note) => {
-                                return <ListItem>
+                                return <li className='mdl-list__item'>
                                     <div className='note-item'>
                                         <h5>{note.text}</h5>
-                                        <Icon icon='close' onClick={(e) => this.removeNoteHandler(note)}/>
+                                        <i className='mdl-none material-icons'
+                                           onClick={(e) => this.removeNoteHandler(note)}>close</i>
                                     </div>
-                                </ListItem>
+                                </li>
                             })}
-                        </List>
+                        </ul>
                     </div>
                     <div className='center-align'>
                         <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
@@ -93,7 +93,9 @@ const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
     <form onSubmit={addNoteHandler}>
         <input className='notes-input' type="text" onInput={handleUpdateInput} value={userInput}
                disabled={!isUserDefined()} placeholder='Type your note' aria-label='add-note'/>
-        <Button label='Add' type="submit"
-                disabled={!isUserDefined() || userInput.trim().length <= 0}>Add</Button>
+        <button label='Add' type="submit" disabled={!isUserDefined() || userInput.trim().length <= 0}
+                class={`mdl-button mdl-js-ripple-effect mdl-js-button ${!isUserDefined() || userInput.trim().length <= 0 ? 'mdl-button--disabled' : null}`}>
+            Add
+        </button>
     </form>
 );

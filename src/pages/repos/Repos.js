@@ -1,5 +1,4 @@
 import {h, Component} from 'preact';
-import {List, ListItem} from 'preact-mdl';
 
 import {store, getCurrentState} from '../../store';
 import NoUser from '../../commons/NoUser';
@@ -19,9 +18,9 @@ export default class Repos extends Component {
         const {repos, login} = getCurrentState().user;
         return (login ?
                 <div id="repos">
-                    <List className="repos-list">
+                    <ul className="mdl-list repos-list">
                         {repos.map((repo) => {
-                            return <ListItem
+                            return <li className='mdl-list__item'
                                 onClick={() => window.open(repo.html_url, '_blank')}
                                 key={repos.indexOf(repo)}
                             >
@@ -29,9 +28,9 @@ export default class Repos extends Component {
                                     <h5>{repo.name}</h5>
                                     <p>{repo.description}</p>
                                 </div>
-                            </ListItem>
+                            </li>
                         })}
-                    </List>
+                    </ul>
                 </div> : <NoUser/>
         )
     }
