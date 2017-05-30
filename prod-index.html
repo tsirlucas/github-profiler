@@ -14,7 +14,7 @@
 </head>
 <body>
 <div id="App"><p>Loading scripts...</p></div>
-<script src="vendor.js"></script>
-<script src="app.js"></script>
+<script><%= htmlWebpackPlugin.options.vendor %></script>
+<script><%= htmlWebpackPlugin.options.app %></script>
 </body>
 </html>

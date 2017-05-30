@@ -82,6 +82,8 @@ const config = {
             template: 'prod-index.html',
             filename: 'index.html',
             inject: false,
+            vendor: fs.readFileSync('github-profiler/vendor.js', 'utf8'),
+            app: fs.readFileSync('github-profiler/app.js', 'utf8'),
             style: fs.readFileSync('github-profiler/styles.css', 'utf8'),
             excludeChunks: ['admin']
         }),
