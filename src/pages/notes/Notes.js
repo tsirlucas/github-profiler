@@ -8,6 +8,7 @@ import reducers from '../../reducers';
 import bindActions from '../../util/bindActions';
 import {getCurrentState, store} from '../../store';
 import NoUser from '../../commons/NoUser';
+import CloseIcon from '../../commons/CloseIcon';
 
 @connect(reducers, bindActions({addNote, removeNote, editNote, listNotes}))
 export default class Notes extends Component {
@@ -73,8 +74,7 @@ export default class Notes extends Component {
                                 return <li className='mdl-list__item'>
                                     <div className='note-item'>
                                         <h5>{note.text}</h5>
-                                        <i className='mdl-none material-icons'
-                                           onClick={(e) => this.removeNoteHandler(note)}>close</i>
+                                        <a onClick={(e) => this.removeNoteHandler(note)}><CloseIcon/></a>
                                     </div>
                                 </li>
                             })}

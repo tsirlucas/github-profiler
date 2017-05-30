@@ -1,6 +1,5 @@
 import {h, Component} from 'preact';
 import {bind} from 'decko';
-import {Layout, LayoutHeader, LayoutTab} from 'preact-mdl';
 
 import {store} from '../../store';
 import {dispatchChangeRoute} from '../../core/router/router.service';

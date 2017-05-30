@@ -1,6 +1,6 @@
 import {Component, h} from 'preact';
 import {bind} from 'decko';
-import {Router, Route} from 'react-router'
+import {Router} from 'preact-router'
 import createHistory from 'history/createHashHistory'
 
 import {store} from './store';
@@ -49,17 +49,15 @@ export default class Routes extends Component {
 
     render() {
         return (
-            <Router history={history}>
-                <div>
-                    <Route path="/" component={Template}/>
-                    <div className="page">
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/user" component={User}/>
-                        <Route path="/repos" component={Repos}/>
-                        <Route path="/notes" component={Notes}/>
-                    </div>
-                </div>
-            </Router>
+            <div>
+                <Template/>
+                <Router history={history}>
+                    <Home path="/"/>
+                    <User path="/user"/>
+                    <Repos path="/repos"/>
+                    <Notes path="/notes"/>
+                </Router>
+            </div>
         )
     }
 }
