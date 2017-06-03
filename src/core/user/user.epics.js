@@ -1,12 +1,11 @@
-import {flatMap, mergeMap, switchMap, map, Observable, takeUntil} from 'rxjs';
-
+import * as rxjs from './index';
 import {SEARCH_USER} from './user.constants';
 import {resolveUser} from './user.actions';
 import {getUser, getRepos} from '../api';
 import {dispatchChangeRoute} from '../router/router.service';
 
 const requestInfo = (payload) =>
-    Observable.forkJoin(
+    rxjs.Observable.forkJoin(
         getUser(payload),
         getRepos(payload)
     );

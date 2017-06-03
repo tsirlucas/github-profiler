@@ -1,3 +1,5 @@
+import {concatMap} from 'rxjs/add/operator/mergeMap';
+
 import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './notes.constants';
 import {addNote, editNote, removeNote, listNotes} from '../api';
 import {
