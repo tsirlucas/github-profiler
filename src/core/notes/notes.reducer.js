@@ -3,6 +3,8 @@ import {
     ADD_NOTE_ERROR,
     RESOLVE_ADD_NOTE,
     REMOVE_NOTE,
+    RESOLVE_REMOVE_NOTE,
+    REMOVE_NOTE_ERROR,
     RESOLVE_EDIT_NOTE,
     RESOLVE_LIST_NOTES
 } from './notes.constants';
@@ -31,8 +33,26 @@ const NotesReducer = (state = {content: []}, {payload, type}) => {
             };
         case REMOVE_NOTE:
             return {
+                content: state.content.map((note) => {
+                    if (note.id === payload.note.id) {
+                        note.removing = true;
+                    }
+                    return note;
+                })
+            };
+        case RESOLVE_REMOVE_NOTE:
+            return {
                 content: state.content.filter((note) => {
                     return note.id !== payload.note.id;
+                })
+            };
+        case REMOVE_NOTE_ERROR:
+            return {
+                content: state.content.map((note) => {
+                    if (note.id === payload.note.id) {
+                        note.removing = false;
+                    }
+                    return note;
                 })
             };
         case RESOLVE_EDIT_NOTE:

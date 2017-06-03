@@ -6,6 +6,7 @@ import {
     RESOLVE_ADD_NOTE,
     REMOVE_NOTE,
     RESOLVE_REMOVE_NOTE,
+    REMOVE_NOTE_ERROR,
     EDIT_NOTE,
     RESOLVE_EDIT_NOTE
 } from './notes.constants';
@@ -21,6 +22,8 @@ export const addNoteError = (note, user) => ({type: ADD_NOTE_ERROR});
 export const resolveAddNotes = payload => ({type: RESOLVE_ADD_NOTE, payload});
 
 export const removeNote = (note, user) => ({type: REMOVE_NOTE, payload: {note, user}});
+
+export const removeNoteError = (note) => ({type: REMOVE_NOTE_ERROR, payload: {note}});
 
 export const resolveRemoveNote = (note) => ({type: RESOLVE_REMOVE_NOTE, payload: {note}});
 

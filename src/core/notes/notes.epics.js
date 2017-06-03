@@ -7,6 +7,8 @@ import {addNote, editNote, removeNote, listNotes} from '../api';
 import {
     listNotes as listNotesAction,
     addNoteError,
+    resolveRemoveNote,
+    removeNoteError,
     resolveListNotes,
     resolveAddNotes,
     resolveEditNote
@@ -37,8 +39,8 @@ const removeNoteEpic = (action$, store) => {
     return action$
         .ofType(REMOVE_NOTE)
         .mergeMap(({payload}) => removeNote(payload.user, payload.note)
-            .map(() => listNotesAction(user.login))
-            .catch(() => Observable.of(resolveAddNotes(payload.note))));
+            .map(() => resolveRemoveNote(payload.note))
+            .catch(() => Observable.of(removeNoteError(payload.note))));
 };
 
 const editNoteEpic = (action$) =>

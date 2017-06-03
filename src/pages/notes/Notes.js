@@ -75,7 +75,8 @@ export default class Notes extends Component {
                                     <div className='note-item'>
                                         <h5>{note.text}</h5>
                                         <a onClick={(e) => this.removeNoteHandler(note)}>
-                                            <Icon icon='remove'
+                                            <Icon icon={note.removing ? 'sync' : 'remove'}
+                                                  className={note.removing ? 'icon-spinner' : ''}
                                                   color='black'/>
                                         </a>
                                     </div>

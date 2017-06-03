@@ -1,6 +1,7 @@
 export const ADD_NOTE = 'ADD_NOTE';
 export const ADD_NOTE_ERROR = 'ADD_NOTE_ERROR';
 export const REMOVE_NOTE = 'REMOVE_NOTE';
+export const REMOVE_NOTE_ERROR = 'REMOVE_NOTE_ERROR';
 export const EDIT_NOTE = 'EDIT_NOTE';
 export const LIST_NOTES = 'LIST_NOTES';
 
