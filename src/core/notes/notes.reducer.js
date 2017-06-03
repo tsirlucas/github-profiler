@@ -1,25 +1,37 @@
-import {RESOLVE_ADD_NOTE, RESOLVE_REMOVE_NOTE, RESOLVE_EDIT_NOTE, RESOLVE_LIST_NOTES} from './notes.constants';
+import {ADD_NOTE, RESOLVE_ADD_NOTE, REMOVE_NOTE, RESOLVE_EDIT_NOTE, RESOLVE_LIST_NOTES} from './notes.constants';
 
-const NotesReducer = (state = [], {payload, type}) => {
+const NotesReducer = (state = {content: []}, {payload, type}) => {
     switch (type) {
         case RESOLVE_LIST_NOTES:
-            return [...payload];
+            return {content: [...payload]};
+        case ADD_NOTE:
+            return {
+                sending: true,
+                content: state.content
+            };
         case RESOLVE_ADD_NOTE:
-            return [
-                ...state,
-                payload
-            ];
-        case RESOLVE_REMOVE_NOTE:
-            return state.filter((note) => {
-                return note.id !== payload.note.id;
-            });
+            return {
+                sending: false,
+                content: [
+                    ...state.content,
+                    payload,
+                ]
+            };
+        case REMOVE_NOTE:
+            return {
+                content: state.content.filter((note) => {
+                    return note.id !== payload.note.id;
+                })
+            };
         case RESOLVE_EDIT_NOTE:
-            return state.map((note) => {
-                if (note.id === payload.note.id) {
-                    note.text = payload.note.text;
-                }
-                return note;
-            });
+            return {
+                content: state.content.map((note) => {
+                    if (note.id === payload.note.id) {
+                        note.text = payload.note.text;
+                    }
+                    return note;
+                })
+            };
         default:
             return state;
     }

@@ -70,7 +70,7 @@ export default class Notes extends Component {
                 <div id='notes'>
                     <div className='notes-list'>
                         <ul className="mdl-list repos-list">
-                            {notes.map((note) => {
+                            {notes.content.map((note) => {
                                 return <li className='mdl-list__item'>
                                     <div className='note-item'>
                                         <h5>{note.text}</h5>
@@ -85,20 +85,20 @@ export default class Notes extends Component {
                     </div>
                     <div className='center-align'>
                         <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
-                                   userInput={userInput} user={user}/>
+                                   userInput={userInput} user={user} sending={notes.sending}/>
                     </div>
                 </div> : <NoUser/>
         )
     }
 }
 
-const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user}) => (
+const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user, sending}) => (
     <form onSubmit={addNoteHandler}>
         <input className='notes-input' type="text" onInput={handleUpdateInput} value={userInput}
                disabled={!isUserDefined()} placeholder='Type your note' aria-label='add-note'/>
         <button label='Add' type="submit" disabled={!isUserDefined() || userInput.trim().length <= 0}
                 class={`mdl-button mdl-js-ripple-effect mdl-js-button ${!isUserDefined() || userInput.trim().length <= 0 ? 'mdl-button--disabled' : null}`}>
-            Add
+            {sending ? <Icon icon='sync' color='white' className='icon-spinner'/> : 'Add'}
         </button>
     </form>
 );

@@ -2,7 +2,7 @@
     "lang": "en",
     "name": "Github Profiler",
     "short_name": "Gh Profiler",
-    "description": "Github Profiler - An application where you can search for Github users and add/edit/remove notes for each one",
+    "description": "Github Profiler - An application where you can search for Github users and add/remove notes for each one",
     "start_url": "./?utm_source=web_app_manifest&utm_medium=web_app_manifest",
     "display": "standalone",
     "orientation": "portrait",

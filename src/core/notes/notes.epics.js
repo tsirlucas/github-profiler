@@ -6,7 +6,6 @@ import {
     listNotes as listNotesAction,
     resolveListNotes,
     resolveAddNotes,
-    resolveRemoveNote,
     resolveEditNote
 } from './notes.actions';
 import {firebaseParser, getLastId} from '../api/firebase-parser.service';
@@ -35,8 +34,7 @@ export const removeNoteEpic = (action$, store) =>
         .mergeMap(({payload}) => removeNote(payload.user, payload.note)
             .map(() => {
                 const {user} = store.getState();
-                store.dispatch(listNotesAction(user.login));
-                return resolveRemoveNote(payload.note);
+                return listNotesAction(user.login);
             }));
 
 export const editNoteEpic = (action$) =>
