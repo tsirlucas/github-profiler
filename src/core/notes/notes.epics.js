@@ -34,14 +34,12 @@ const addNoteEpic = (action$) =>
             .map(() => resolveAddNotes({id: nextActionId++, text: payload.note}))
             .catch(() => Observable.of(addNoteError())));
 
-const removeNoteEpic = (action$, store) => {
-    const {user} = store.getState();
-    return action$
+const removeNoteEpic = (action$, store) =>
+    action$
         .ofType(REMOVE_NOTE)
         .mergeMap(({payload}) => removeNote(payload.user, payload.note)
             .map(() => resolveRemoveNote(payload.note))
             .catch(() => Observable.of(removeNoteError(payload.note))));
-};
 
 const editNoteEpic = (action$) =>
     action$
