@@ -1,12 +1,12 @@
-import * as rxjs from './index';
+import * as Rxjs from './index';
 import {SEARCH_USER} from './user.constants';
-import {resolveUser} from './user.actions';
+import {searchUserError, resolveUser} from './user.actions';
 import {listNotes} from '../../core/notes/notes.actions';
 import {getUser, getRepos} from '../api';
 import {dispatchChangeRoute} from '../router/router.service';
 
 const requestInfo = (payload) =>
-    rxjs.Observable.forkJoin(
+    Rxjs.Observable.forkJoin(
         getUser(payload),
         getRepos(payload)
     );
@@ -16,11 +16,10 @@ export const searchUserEpic = (action$, store) => {
     return action$
         .ofType(SEARCH_USER)
         .concatMap(({payload}) => requestInfo(payload)
-            .map(([user, repos]) => resolveUser(user.response, repos.response))
-            .finally(() => {
-                const {user} = store.getState();
-                store.dispatch(listNotes(user.login));
+            .map(([user, repos]) => {
+                store.dispatch(listNotes(user.response.login));
+                store.dispatch(resolveUser(user.response, repos.response));
                 return dispatchChangeRoute('/user')
             })
-            .catch(console.log.bind(console)));
+            .catch(() => Rxjs.Observable.of(searchUserError())));
 };

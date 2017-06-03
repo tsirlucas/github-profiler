@@ -2,6 +2,7 @@ import {
     LIST_NOTES,
     RESOLVE_LIST_NOTES,
     ADD_NOTE,
+    ADD_NOTE_ERROR,
     RESOLVE_ADD_NOTE,
     REMOVE_NOTE,
     RESOLVE_REMOVE_NOTE,
@@ -14,6 +15,8 @@ export const listNotes = user => ({type: LIST_NOTES, payload: {user}});
 export const resolveListNotes = payload => ({type: RESOLVE_LIST_NOTES, payload});
 
 export const addNote = (note, user) => ({type: ADD_NOTE, payload: {note, user}});
+
+export const addNoteError = (note, user) => ({type: ADD_NOTE_ERROR});
 
 export const resolveAddNotes = payload => ({type: RESOLVE_ADD_NOTE, payload});
 

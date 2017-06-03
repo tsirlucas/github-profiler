@@ -1,12 +1,16 @@
 import {combineEpics} from 'redux-observable';
 
-import {searchUserEpic} from './core/user/user.epics';
-import {listNotesEpic, addNoteEpic, removeNoteEpic, editNoteEpic} from './core/notes/notes.epics';
+import {searchUserEpic as userEpic} from './core/user/user.epics';
+import notesEpics from './core/notes/notes.epics';
 
-export const epics = combineEpics(
-    searchUserEpic,
-    listNotesEpic,
-    addNoteEpic,
-    removeNoteEpic,
-    editNoteEpic
-);
+const handleUncaughtErrors = (error, stream) => {
+    //Loging uncaught errors and returning stream (avoids epics to break)
+    console.error('Uncaught', error);
+    return stream;
+};
+
+export const epics = (action$, store) => combineEpics(
+    userEpic,
+    notesEpics
+)(action$, store)
+    .catch(handleUncaughtErrors);

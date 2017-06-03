@@ -1,4 +1,11 @@
-import {ADD_NOTE, RESOLVE_ADD_NOTE, REMOVE_NOTE, RESOLVE_EDIT_NOTE, RESOLVE_LIST_NOTES} from './notes.constants';
+import {
+    ADD_NOTE,
+    ADD_NOTE_ERROR,
+    RESOLVE_ADD_NOTE,
+    REMOVE_NOTE,
+    RESOLVE_EDIT_NOTE,
+    RESOLVE_LIST_NOTES
+} from './notes.constants';
 
 const NotesReducer = (state = {content: []}, {payload, type}) => {
     switch (type) {
@@ -7,6 +14,11 @@ const NotesReducer = (state = {content: []}, {payload, type}) => {
         case ADD_NOTE:
             return {
                 sending: true,
+                content: state.content
+            };
+        case ADD_NOTE_ERROR:
+            return {
+                sending: false,
                 content: state.content
             };
         case RESOLVE_ADD_NOTE:
