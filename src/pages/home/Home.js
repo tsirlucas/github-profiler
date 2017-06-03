@@ -53,15 +53,15 @@ export default class Home extends Component {
         }
     }
 
-    render(props, {user}) {
+    render(props, {user, userInput}) {
         return (
             <div id='home'>
                 <form id='search-user' onSubmit={this.searchUser}>
                     <input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username'
-                           value={this.state.userInput} aria-label='username'/>
+                           value={userInput} aria-label='username'/>
                     <button
-                        class={`mdl-button mdl-js-ripple-effect mdl-js-button ${this.state.userInput.trim().length <= 0 ? 'mdl-button--disabled' : null}`}
-                        type='submit' disabled={this.state.userInput.trim().length <= 0}>{user.loading ? <Icon icon='sync' color='white' className='icon-spinner'/> : 'Search'}
+                        class={`mdl-button mdl-js-ripple-effect mdl-js-button ${userInput.trim().length <= 0 ? 'mdl-button--disabled' : ''}`}
+                        type='submit' disabled={userInput.trim().length <= 0}>{user.loading ? <Icon icon='sync' color='white' className='icon-spinner'/> : 'Search'}
                     </button>
                 </form>'
             </div>

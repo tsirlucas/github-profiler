@@ -13,7 +13,7 @@
     -ms-flex-align: center;
     align-items: center;
 
-    font-family: Roboto,Helvetica,Arial,sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: .04em;
@@ -27,10 +27,9 @@
     flex-wrap: nowrap;
     padding: 16px;
     cursor: default;
-    color: rgba(0,0,0,.87);
+    color: rgba(0, 0, 0, .87);
     overflow: hidden;
 }
-
 
 .collection {
     margin: 0.5rem 0 1rem 0;
@@ -53,3 +52,12 @@
     margin: 0;
     border-bottom: 1px solid #e0e0e0;
 }
+
+.pinned-list-item {
+    border-radius: 3px;
+    padding: 16px;
+    border: 1px #d1d5da solid;
+    width: 100%;
+    cursor: pointer;
+}
+

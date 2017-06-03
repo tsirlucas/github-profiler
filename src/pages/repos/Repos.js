@@ -2,6 +2,8 @@ import {h, Component} from 'preact';
 
 import {store, getCurrentState} from '../../store';
 import NoUser from '../../commons/NoUser';
+import ReposList from '../../commons/components/List';
+import ReposItem from '../../commons/components/ListItem';
 
 export default class Repos extends Component {
     componentDidMount() {
@@ -18,19 +20,12 @@ export default class Repos extends Component {
         const {repos, login} = getCurrentState().user;
         return (login ?
                 <div id="repos">
-                    <ul className="mdl-list repos-list">
-                        {repos.map((repo) => {
-                            return <li className='mdl-list__item'
-                                onClick={() => window.open(repo.html_url, '_blank')}
-                                key={repos.indexOf(repo)}
-                            >
-                                <div className='pinned-repo-item'>
-                                    <h5>{repo.name}</h5>
-                                    <p>{repo.description}</p>
-                                </div>
-                            </li>
-                        })}
-                    </ul>
+                    <ReposList>
+                        {repos.map((repo) =>
+                            <ReposItem title={repo.name} description={repo.description}
+                                       onClick={() => window.open(repo.html_url, '_blank')}/>
+                        )}
+                    </ReposList>
                 </div> : <NoUser/>
         )
     }

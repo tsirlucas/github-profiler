@@ -1,14 +1,16 @@
+import {bind} from 'decko';
 import {h, Component} from 'preact';
 import {connect} from 'preact-redux';
-import {bind} from 'decko';
 
-import {addNote, removeNote, editNote, listNotes} from '../../core/notes/notes.actions';
-import {isUserDefined} from '../../core/user/user.helper';
 import reducers from '../../reducers';
+import NoUser from '../../commons/NoUser';
+import NotesForm from './components/NotesForm';
 import bindActions from '../../util/bindActions';
 import {getCurrentState, store} from '../../store';
-import NoUser from '../../commons/NoUser';
-import Icon from '../../commons/Icon';
+import NotesList from '../../commons/components/List';
+import NotesItem from '../../commons/components/ListItem';
+import {isUserDefined} from '../../core/user/user.helper';
+import {addNote, removeNote, editNote, listNotes} from '../../core/notes/notes.actions';
 
 @connect(reducers, bindActions({addNote, removeNote, editNote, listNotes}))
 export default class Notes extends Component {
@@ -68,38 +70,14 @@ export default class Notes extends Component {
         let {user} = getCurrentState();
         return (user.login ?
                 <div id='notes'>
-                    <div className='notes-list'>
-                        <ul className="mdl-list repos-list">
-                            {notes.content.map((note) => {
-                                return <li className='mdl-list__item'>
-                                    <div className='note-item'>
-                                        <h5>{note.text}</h5>
-                                        <a onClick={(e) => this.removeNoteHandler(note)}>
-                                            <Icon icon={note.removing ? 'sync' : 'remove'}
-                                                  className={note.removing ? 'icon-spinner' : ''}
-                                                  color='black'/>
-                                        </a>
-                                    </div>
-                                </li>
-                            })}
-                        </ul>
-                    </div>
-                    <div className='center-align'>
-                        <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
-                                   userInput={userInput} user={user} sending={notes.sending}/>
-                    </div>
+                    <NotesList>
+                        {notes.content.map((note) =>
+                            <NotesItem title={note.text} note={note} removeHandler={this.removeNoteHandler}/>
+                        )}
+                    </NotesList>
+                    <NotesForm addNoteHandler={this.addNoteHandler} handleUpdateInput={this.handleUpdateInput}
+                               userInput={userInput} user={user} sending={notes.sending}/>
                 </div> : <NoUser/>
         )
     }
 }
-
-const NotesForm = ({handleUpdateInput, addNoteHandler, userInput, user, sending}) => (
-    <form onSubmit={addNoteHandler}>
-        <input className='notes-input' type="text" onInput={handleUpdateInput} value={userInput}
-               disabled={!isUserDefined()} placeholder='Type your note' aria-label='add-note'/>
-        <button label='Add' type="submit" disabled={!isUserDefined() || userInput.trim().length <= 0}
-                class={`mdl-button mdl-js-ripple-effect mdl-js-button ${!isUserDefined() || userInput.trim().length <= 0 ? 'mdl-button--disabled' : null}`}>
-            {sending ? <Icon icon='sync' color='white' className='icon-spinner'/> : 'Add'}
-        </button>
-    </form>
-);

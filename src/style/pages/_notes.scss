@@ -1,17 +1,14 @@
 #notes {
-    .notes-list {
+    .mdl-list {
         position: fixed;
         top: 70px;
         bottom: 50px;
         right: 0;
         overflow-y: scroll;
         width: 100%;
-        .note-item {
-            border-radius: 3px;
-            padding: 16px;
-            border: 1px #d1d5da solid;
-            width: 100%;
+        .pinned-list-item {
             position: relative;
+            cursor: default;
 
             a {
                 cursor: pointer;

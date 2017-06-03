@@ -1,7 +1,5 @@
 import {bindActionCreators} from 'redux';
 
-const bindActions = (actions) => dispatch => ({
+export default (actions) => dispatch => ({
     ...bindActionCreators(actions, dispatch)
 });
-
-export default bindActions;

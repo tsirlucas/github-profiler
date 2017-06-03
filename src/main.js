@@ -3,6 +3,7 @@ import {Provider} from 'preact-redux';
 
 import {store} from './store';
 import Routes from './routes';
+import initSW from './util/initSW';
 
 import './style/import.scss';
 
@@ -16,15 +17,6 @@ const init = () => {
     )
 };
 
+initSW();
 init();
 
-if ('serviceWorker' in navigator && location.protocol === 'https:') {
-    console.log('Starting service worker...');
-    navigator.serviceWorker.register('/github-profiler/service-worker.js', {scope: './'})
-        .then((reg) => {
-            console.log('Done. Now you\'re running offline.');
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-}

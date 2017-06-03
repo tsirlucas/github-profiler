@@ -1,7 +1,7 @@
 import {combineEpics} from 'redux-observable';
 
-import {searchUserEpic as userEpic} from './core/user/user.epics';
 import notesEpics from './core/notes/notes.epics';
+import {searchUserEpic as userEpic} from './core/user/user.epics';
 
 const handleUncaughtErrors = (error, stream) => {
     //Loging uncaught errors and returning stream (avoids epics to break)
