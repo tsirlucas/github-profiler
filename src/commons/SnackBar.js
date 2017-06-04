@@ -36,7 +36,7 @@ export default class SnackBar extends Component {
 		const {text} = snackbar;
 
 		if (text) {
-			this.popSnackBar(text)
+			this.popSnackBar(text);
 		}
 	}
 

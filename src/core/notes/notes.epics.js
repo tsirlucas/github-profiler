@@ -1,4 +1,3 @@
-import {Observable} from 'rxjs/Observable';
 import {combineEpics} from 'redux-observable';
 
 import handleHttpRequest from '../../util/handleHttpRequest';
