@@ -1,0 +1,2 @@
+export const POP_MESSAGE = 'POP_MESSAGE';
+export const CLEAR_SNACKBAR = 'CLEAR_SNACKBAR';

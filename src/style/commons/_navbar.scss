@@ -8,7 +8,6 @@ $black: #000;
 $white: #fff;
 $github-black: #24292e;
 $white_60: rgba(255, 255, 255, 0.6);
-$color_violet_red_approx: #ff4081;
 
 //fonts
 $roboto: "Roboto";
@@ -60,7 +59,7 @@ $sans-serif: "sans-serif";
 				bottom: 0;
 				left: 0;
 				position: absolute;
-				background: $color_violet_red_approx;
+				background: $pink-violet;
 				animation: border-expand 0.2s cubic-bezier(0.4, 0.0, 0.4, 1) alternate forwards;
 				transition: all 1s cubic-bezier(0.4, 0.0, 1, 1);
 			}

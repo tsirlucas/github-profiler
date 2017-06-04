@@ -4,6 +4,7 @@ import {SEARCH_USER} from './user.constants';
 import {listNotes} from '../../core/notes/notes.actions';
 import {searchUserError, resolveUser} from './user.actions';
 import {dispatchChangeRoute} from '../router/router.service';
+import handleHttpRequest from '../../util/handleHttpRequest';
 
 const requestInfo = payload =>
 	Rxjs.Observable.forkJoin(
@@ -20,4 +21,4 @@ export const searchUserEpic = (action$, store) =>
 				store.dispatch(resolveUser(user.response, repos.response));
 				return dispatchChangeRoute('/user');
 			})
-			.catch(() => Rxjs.Observable.of(searchUserError())));
+			.catch((err) => handleHttpRequest(err, searchUserError)));

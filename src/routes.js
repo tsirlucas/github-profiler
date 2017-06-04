@@ -9,6 +9,7 @@ import User from './pages/user/User';
 import Repos from './pages/repos/Repos';
 import Notes from './pages/notes/Notes';
 import Template from './commons/Template';
+import SnackBar from './commons/SnackBar';
 import {dispatchChangeRoute} from './core/router/router.service';
 
 export const history = createHistory();
@@ -57,6 +58,7 @@ export default class Routes extends Component {
 					<Repos path="/repos"/>
 					<Notes path="/notes"/>
 				</Router>
+				<SnackBar/>
 			</div>
 		);
 	}

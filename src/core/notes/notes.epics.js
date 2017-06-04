@@ -1,6 +1,7 @@
 import {Observable} from 'rxjs/Observable';
 import {combineEpics} from 'redux-observable';
 
+import handleHttpRequest from '../../util/handleHttpRequest';
 import {addNote, editNote, removeNote, listNotes} from '../api';
 import {firebaseParser, getLastId} from '../api/firebase-parser.service';
 import {ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, LIST_NOTES} from './notes.constants';
@@ -26,14 +27,14 @@ const addNoteEpic = action$ =>
 		.ofType(ADD_NOTE)
 		.mergeMap(({payload}) => addNote(payload.user, {[nextActionId]: payload.note})
 			.map(() => resolveAddNotes({id: nextActionId++, text: payload.note}))
-			.catch(() => Observable.of(addNoteError())));
+			.catch((err) => handleHttpRequest(err, addNoteError)));
 
 const removeNoteEpic = (action$) =>
 	action$
 		.ofType(REMOVE_NOTE)
 		.mergeMap(({payload}) => removeNote(payload.user, payload.note)
 			.map(() => resolveRemoveNote(payload.note))
-			.catch(() => Observable.of(removeNoteError(payload.note))));
+			.catch((err) => handleHttpRequest(err, () => removeNoteError(payload.note))));
 
 const editNoteEpic = action$ =>
 	action$

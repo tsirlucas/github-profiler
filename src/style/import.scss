@@ -2,6 +2,7 @@
 
 $header-height: 70px;
 $github-black: rgb(36, 41, 46);
+$pink-violet: #ff4081;
 
 @import "commons/resets";
 @import "commons/typography";
@@ -11,6 +12,7 @@ $github-black: rgb(36, 41, 46);
 @import "commons/no-user";
 @import "commons/lists";
 @import "commons/buttons";
+@import "commons/components/snackbar";
 @import "utilities/utilities";
 @import "pages/home";
 @import "pages/user";

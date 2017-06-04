@@ -23,7 +23,9 @@ export default class Notes extends Component {
 
 	componentWillMount() {
 		let {user} = getCurrentState();
-		this.props.listNotes(user.login);
+		if (user.login) {
+			this.props.listNotes(user.login);
+		}
 	}
 
 	componentDidMount() {
