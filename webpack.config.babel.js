@@ -26,10 +26,6 @@ const config = {
 	},
 
 	resolve: {
-		alias: {
-			'react': 'preact-compat',
-			'react-dom': 'preact-compat'
-		},
 		extensions: ['.js', '.jsx']
 	},
 
@@ -43,7 +39,7 @@ const config = {
 		loaders: [
 			{
 				test: /\.jsx?$/,
-				include: [path.resolve('src'), path.resolve('node_modules/preact-compat/src')],
+				include: [path.resolve('src')],
 				loader: 'babel-loader',
 			},
 			{test: /\.(png|woff|woff2|eot|ttf|svg|ico)$/, loader: 'url-loader?limit=100000'},
