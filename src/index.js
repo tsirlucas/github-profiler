@@ -8,7 +8,7 @@ import initSW from './util/initSW';
 import './style/import.scss';
 
 const init = () => {
-	document.querySelector('#App').removeChild(document.querySelector('p'));
+	document.querySelector('#App').removeChild(document.querySelector('h3'));
 	render(
 		<Provider store={store}>
 			<Routes />
