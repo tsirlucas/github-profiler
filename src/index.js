@@ -8,13 +8,13 @@ import initSW from './util/initSW';
 import './style/import.scss';
 
 const init = () => {
-    document.querySelector('#App').removeChild(document.querySelector('p'));
-    render(
-        <Provider store={store}>
-            <Routes />
-        </Provider>,
-        document.querySelector('#App')
-    )
+	document.querySelector('#App').removeChild(document.querySelector('p'));
+	render(
+		<Provider store={store}>
+			<Routes />
+		</Provider>,
+		document.querySelector('#App')
+	);
 };
 
 initSW();

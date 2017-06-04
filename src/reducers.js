@@ -5,9 +5,9 @@ import NotesReducer from './core/notes/notes.reducer';
 import RoutesReducer from './core/router/router.reducer';
 
 const reducers = combineReducers({
-    route: RoutesReducer,
-    user: UserReducer,
-    notes: NotesReducer
+	route: RoutesReducer,
+	user: UserReducer,
+	notes: NotesReducer
 });
 
 export default reducers;

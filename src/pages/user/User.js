@@ -6,37 +6,37 @@ import {getCurrentState} from '../../store';
 import UserInfo from './components/UserInfo';
 
 export default class User extends Component {
-    componentDidMount() {
-        let store = this.context.store;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate()
-        });
-    }
+	componentDidMount() {
+		const store = this.context.store;
+		this.unsubscribe = store.subscribe(() => {
+			this.forceUpdate();
+		});
+	}
 
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
 
-    render() {
-        let {user} = getCurrentState();
+	render() {
+		const {user} = getCurrentState();
 
-        const userLabels = {
-            name: 'Name',
-            email: 'Email',
-            location: 'Location',
-            company: 'Company',
-            followers: 'Followers',
-            following: 'Following',
-            public_repos: 'Public repos',
-            blog: 'Blog'
-        };
+		const userLabels = {
+			name: 'Name',
+			email: 'Email',
+			location: 'Location',
+			company: 'Company',
+			followers: 'Followers',
+			following: 'Following',
+			public_repos: 'Public repos',
+			blog: 'Blog'
+		};
 
-        return (
-            user.login ?
-                <div id='user'>
-                    <Avatar user={user}/>
-                    < UserInfo user={user} userLabels={userLabels}/>
-                </div> : <NoUser/>
-        )
-    }
+		return (
+			user.login ?
+				<div id="user">
+					<Avatar user={user}/>
+					<UserInfo user={user} userLabels={userLabels}/>
+				</div> : <NoUser />
+		);
+	}
 }

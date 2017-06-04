@@ -2,14 +2,14 @@ import webpack from 'webpack';
 import path from 'path';
 import glob from 'glob';
 import fs from 'fs';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
-import SWPrecache from 'sw-precache-webpack-plugin';
 import PurifyCSSPlugin from 'purifycss-webpack';
+import SWPrecache from 'sw-precache-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
+const mainPath = path.resolve(__dirname, 'src', 'index.js');
 const buildPath = path.resolve(__dirname, 'github-profiler');
-const mainPath = path.resolve(__dirname, 'src', 'main.js');
 
 const config = {
     entry: {
