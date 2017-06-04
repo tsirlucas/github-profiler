@@ -1,4 +1,4 @@
-import * as Rxjs from './index';
+import * as Rxjs from '../../util/rx.imports';
 import {getUser, getRepos} from '../api';
 import {SEARCH_USER} from './user.constants';
 import {listNotes} from '../../core/notes/notes.actions';
