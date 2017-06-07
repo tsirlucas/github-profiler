@@ -68,7 +68,7 @@
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
     "eslint": "eslint src",
-    "prod": "NODE_ENV=production webpack-dashboard webpack --config webpack.production.config.babel.js",
+    "prod": "NODE_ENV=production webpack --config webpack.production.config.babel.js",
     "deploy": "gh-pages -d github-profiler"
   },
   "author": "tsirlucas@gmail.com",
