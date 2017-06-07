@@ -1,14 +1,12 @@
-import is from 'is_js';
-
 export const firebaseParser = (data) => {
 	switch (true) {
-		case is.array(data):
+		case data && data.constructor === Array:
 			return data.map(item => item ? {id: data.indexOf(item), text: item} : null)
 				.filter(item => item);
 
-		case (is.object(data) && !data.hasOwnProperty('error')):
+		case (data !== null && typeof data === 'object'):
 			return Object.keys(data).map(item => ({id: parseInt(item, 10), text: data[item]}))
-				.filter(item => is.not.null(item.text));
+				.filter(item => item.text !== null);
 		default:
 			return [];
 	}

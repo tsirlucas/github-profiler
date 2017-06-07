@@ -1,4 +1,3 @@
-import is from 'is_js';
 import {bind} from 'decko';
 import {Component, h} from 'preact';
 import {connect} from 'preact-redux';
@@ -46,7 +45,7 @@ export default class Home extends Component {
 	@bind
 	searchUser(e) {
 		e.preventDefault();
-		if (is.not.empty(this.state.userInput) && is.not.undefined(this.state.userInput) && this.state.userInput.trim().length > 0) {
+		if (this.state.userInput.length > 0 && this.state.userInput && this.state.userInput.trim().length > 0) {
 			this.props.searchUser(this.state.userInput);
 			//this.props.listNotesAction(this.state.userInput);
 			this.state.userInput = '';
