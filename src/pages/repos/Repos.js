@@ -1,7 +1,8 @@
 import {h, Component} from 'preact';
 
+import {store} from '../../index';
 import NoUser from '../../commons/NoUser';
-import {store, getCurrentState} from '../../store';
+import {getCurrentState} from '../../store';
 import ReposList from '../../commons/components/List';
 import ReposItem from '../../commons/components/ListItem';
 

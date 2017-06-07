@@ -1,11 +1,8 @@
 import {h, Component} from 'preact';
-import {connect} from 'preact-redux';
 
-import reducers from '../reducers';
-import bindActions from '../util/bindActions';
+import {store} from '../store';
 import {clearSnackBar} from '../core/snackbar/snackbar.actions';
 
-@connect(reducers, bindActions({clearSnackBar}))
 export default class SnackBar extends Component {
 
 	state = {
@@ -26,7 +23,7 @@ export default class SnackBar extends Component {
 				snackBarText: text
 			});
 
-			this.props.clearSnackBar();
+			store.dispatch(clearSnackBar());
 		}, 200);
 		this.timeout = setTimeout(() => this.setState({showSnackBar: false}), timer);
 	}
@@ -41,7 +38,6 @@ export default class SnackBar extends Component {
 	}
 
 	componentWillMount() {
-		let store = this.context.store;
 		this.unsubscribe = store.subscribe(() => this.syncState(store));
 	}
 

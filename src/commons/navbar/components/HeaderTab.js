@@ -1,11 +1,12 @@
 import {h} from 'preact';
+import {Link} from 'preact-router/match';
 
-import {dispatchChangeRoute} from '../../../core/router/router.service';
-
-export default ({path, currentPath, label}) => (
-	<a
-		onClick={() => dispatchChangeRoute(path)}
-		active={currentPath === path}
-		className={`mdl-layout__tab ${currentPath === path ? 'mdl-layout__tab--active is-active' : ''}`}
-	>{label}</a>
+export default ({path, label}) => (
+	<Link
+		activeClassName='mdl-layout__tab--active is-active'
+		className='mdl-layout__tab'
+		href={path}
+		rel='noopener'
+		name={label.toLowerCase()}
+	>{label}</Link>
 );

@@ -1,5 +1,6 @@
 import {h, Component} from 'preact';
 
+import {store} from '../../index';
 import Avatar from './components/Avatar';
 import NoUser from '../../commons/NoUser';
 import {getCurrentState} from '../../store';
@@ -7,7 +8,6 @@ import UserInfo from './components/UserInfo';
 
 export default class User extends Component {
 	componentDidMount() {
-		const store = this.context.store;
 		this.unsubscribe = store.subscribe(() => {
 			this.forceUpdate();
 		});

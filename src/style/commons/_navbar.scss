@@ -87,10 +87,6 @@ $sans-serif: "sans-serif";
 	}
 }
 
-.mdl-layout__title {
-	@extend %title-template;
-}
-
 .mdl-layout-title {
 	@extend %title-template;
 	display: block;
@@ -101,6 +97,10 @@ $sans-serif: "sans-serif";
 	letter-spacing: .02em;
 	font-weight: 400;
 	box-sizing: border-box;
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
 }
 
 .mdl-layout-spacer {

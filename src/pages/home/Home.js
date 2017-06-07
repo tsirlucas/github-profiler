@@ -1,14 +1,10 @@
-import {bind} from 'decko';
 import {Component, h} from 'preact';
-import {connect} from 'preact-redux';
 
-import reducers from '../../reducers';
+import {store} from '../../index';
+import bind from '../../util/bind';
 import Icon from '../../commons/Icon';
-import bindActions from '../../util/bindActions';
 import {searchUser} from '../../core/user/user.actions';
-import {listNotesAction} from '../../core/notes/notes.actions';
 
-@connect(reducers, bindActions({searchUser, listNotesAction}))
 export default class Home extends Component {
 	constructor(props) {
 		super(props);
@@ -28,7 +24,6 @@ export default class Home extends Component {
 
 	componentDidMount() {
 		this.setState({userInput: ''});
-		let {store} = this.context;
 		this.syncState(store);
 		this.unsubscribe = store.subscribe(() => this.syncState(store));
 	}
@@ -46,8 +41,7 @@ export default class Home extends Component {
 	searchUser(e) {
 		e.preventDefault();
 		if (this.state.userInput.length > 0 && this.state.userInput && this.state.userInput.trim().length > 0) {
-			this.props.searchUser(this.state.userInput);
-			//this.props.listNotesAction(this.state.userInput);
+			store.dispatch(searchUser(this.state.userInput));
 			this.state.userInput = '';
 		}
 	}
@@ -56,9 +50,9 @@ export default class Home extends Component {
 		return (
 			<div id='home'>
 				<form id='search-user' onSubmit={this.searchUser}>
-					<input id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username'
+					<input href='/github-profiler/' id='user-input' type="text" onInput={this.updateSearchText} placeholder='Username'
 								 value={userInput} aria-label='username'/>
-					<button
+					<button href='/github-profiler/'
 						class={`mdl-button mdl-js-ripple-effect mdl-js-button ${userInput.trim().length <= 0 ? 'mdl-button--disabled' : ''}`}
 						type='submit' disabled={userInput.trim().length <= 0}>{user.loading ?
 						<Icon icon='sync' color='white' className='icon-spinner'/> : 'Search'}
