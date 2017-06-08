@@ -3,7 +3,7 @@ import {h} from 'preact';
 import Icon from '../Icon';
 
 export default ({title, note, description, removeHandler, onClick}) => (
-	<li className="mdl-list__item">
+	<li className="list-item">
 		<div className="pinned-list-item" onClick={onClick}>
 			<h5>{title || note.text}</h5>
 			{description ? <p>{description}</p> : null}

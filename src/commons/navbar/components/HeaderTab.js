@@ -3,8 +3,8 @@ import {Link} from 'preact-router/match';
 
 export default ({path, label}) => (
 	<Link
-		activeClassName='mdl-layout__tab--active is-active'
-		className='mdl-layout__tab'
+		activeClassName='is-active'
+		className='tab'
 		href={path}
 		rel='noopener'
 		name={label.toLowerCase()}

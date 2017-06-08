@@ -14,8 +14,7 @@ const buildPath = path.resolve(__dirname, 'github-profiler');
 
 const config = {
 	entry: {
-		app: [mainPath],
-		vendor: ['preact']
+		bundle: [mainPath]
 	},
 	output: {
 		path: buildPath,
@@ -50,10 +49,10 @@ const config = {
 			sourceMap: false,
 			compress: {
 				unused: 1,
-				warnings: 0,
+				warnings: 1,
 				comparisons: 1,
 				conditionals: 1,
-				negate_iife: 0, // <- for `LazyParseWebpackPlugin()`
+				negate_iife: 1, // <- for `LazyParseWebpackPlugin()`
 				dead_code: 1,
 				if_return: 1,
 				join_vars: 1,
@@ -78,8 +77,7 @@ const config = {
 			template: 'prod-index.html',
 			filename: 'index.html',
 			inject: false,
-			vendor: fs.readFileSync('github-profiler/vendor.js', 'utf8'),
-			app: fs.readFileSync('github-profiler/app.js', 'utf8'),
+			bundle: fs.readFileSync('github-profiler/bundle.js', 'utf8'),
 			style: fs.readFileSync('github-profiler/styles.css', 'utf8'),
 			excludeChunks: ['admin'],
 			minify: {
