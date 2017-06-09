@@ -6,8 +6,8 @@ import PurifyCSSPlugin from 'purifycss-webpack';
 import SWPrecache from 'sw-precache-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import DashboardPlugin from 'webpack-dashboard/plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import HtmlWebpackInlineSourcePlugin from 'html-webpack-inline-source-plugin';
 
 const mainPath = path.resolve(__dirname, 'src', 'index.js');
 const buildPath = path.resolve(__dirname, 'github-profiler');
@@ -73,18 +73,6 @@ const config = {
 				minify: true
 			}
 		}),
-		new HtmlWebpackPlugin({
-			template: 'prod-index.html',
-			filename: 'index.html',
-			inject: false,
-			bundle: fs.readFileSync('github-profiler/bundle.js', 'utf8'),
-			style: fs.readFileSync('github-profiler/styles.css', 'utf8'),
-			excludeChunks: ['admin'],
-			minify: {
-				collapseWhitespace: true,
-				removeComments: true
-			},
-		}),
 		new CopyWebpackPlugin([
 			{from: 'assets', to: 'assets'},
 			{from: 'manifest.json', to: '.'}
@@ -105,6 +93,17 @@ const config = {
 				}
 			]
 		}),
+		new HtmlWebpackPlugin({
+			template: 'prod-index.html',
+			filename: 'index.html',
+			excludeChunks: ['admin'],
+			inlineSource: '(bundle.js|styles.css)',
+			minify: {
+				collapseWhitespace: true,
+				removeComments: true
+			},
+		}),
+		new HtmlWebpackInlineSourcePlugin()
 	]
 };
 

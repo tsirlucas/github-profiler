@@ -1,46 +1,47 @@
 #notes {
-    .list {
-        position: fixed;
-        top: 70px;
-        bottom: 50px;
-        right: 0;
-        overflow-y: scroll;
-        width: 100%;
-        .pinned-list-item {
-            position: relative;
-            cursor: default;
+	.list {
+		padding-top: $header-height;
+		width: 100%;
+		margin-top: 0;
+		margin-bottom: 50px;
+		.pinned-list-item {
+			position: relative;
+			cursor: default;
 
-            a {
-                cursor: pointer;
-                position: absolute;
-                top: 5px;
-                right: 5px;
-            }
-        }
-    }
-    form {
-        width: 100%;
-        height: 50px;
-        outline: none;
-        vertical-align: middle;
-        display: block;
-        bottom: 0;
-        right: 0;
-        position: fixed;
-        .notes-input {
-            display: block;
-            padding: 0 16px;
-            width: 60vw;
-            position: fixed;
-            right: 27vw;
-        }
-        button {
-            position: fixed;
-            right: 5vw;
-            outline: none;
-            width: 12vw;
-            background-color: $github-black;
-            color: white;
-        }
-    }
+			a {
+				cursor: pointer;
+				position: absolute;
+				top: 5px;
+				right: 5px;
+			}
+		}
+	}
+	form {
+		width: 100%;
+		height: 50px;
+		padding-top: 10px;
+		background-color: white;
+		border-top: 1px #d1d5da solid;
+		outline: none;
+		vertical-align: middle;
+		display: block;
+		bottom: 0;
+		right: 0;
+		position: fixed;
+		.notes-input {
+			display: block;
+			padding: 0 16px;
+			width: 60vw;
+			position: fixed;
+			right: 27vw;
+		}
+		button {
+			position: fixed;
+			right: 5vw;
+			outline: none;
+			width: 12vw;
+			background-color: $github-black;
+			color: white;
+		}
+	}
 }

@@ -43,6 +43,7 @@
     "gh-pages": "^1.0.0",
     "glob": "^7.1.2",
     "html-compression-webpack-plugin": "^0.3.0",
+    "html-webpack-inline-source-plugin": "0.0.9",
     "html-webpack-plugin": "^2.28.0",
     "nock": "^9.0.2",
     "node-sass": "^4.5.3",
@@ -71,8 +72,9 @@
   "scripts": {
     "start": "webpack-dashboard -- webpack-dev-server",
     "eslint": "eslint src",
-    "prod": "NODE_ENV=production BABEL_ENV=production webpack --config webpack.production.config.babel.js",
-    "deploy": "gh-pages -d github-profiler"
+		"prebuild": "rm -rf github-profiler mkdirp github-profiler",
+    "build": "NODE_ENV=production BABEL_ENV=production webpack --config webpack.production.config.babel.js",
+    "deploy": "npm run -s build && gh-pages -d github-profiler"
   },
   "author": "tsirlucas@gmail.com",
   "license": "ISC"
