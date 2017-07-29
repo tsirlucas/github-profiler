@@ -1,8 +1,11 @@
 import {h, Component} from 'preact';
+import pureSubscribe from 'redux-pure-subscribe';
 
 import {store} from '../store';
+import pure from '../util/pureComponent';
 import {clearSnackBar} from '../core/snackbar/snackbar.actions';
 
+@pure()
 export default class SnackBar extends Component {
 
 	state = {
@@ -28,17 +31,16 @@ export default class SnackBar extends Component {
 		this.timeout = setTimeout(() => this.setState({showSnackBar: false}), timer);
 	}
 
-	syncState({getState}) {
-		const {snackbar} = getState();
+	syncState = ({snackbar}) => {
 		const {text} = snackbar;
 
 		if (text) {
 			this.popSnackBar(text);
 		}
-	}
+	};
 
 	componentWillMount() {
-		this.unsubscribe = store.subscribe(() => this.syncState(store));
+		this.unsubscribe = pureSubscribe(store, this.syncState, 'snackbar');
 	}
 
 	componentDidUnmount() {
