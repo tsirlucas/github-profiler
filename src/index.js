@@ -1,4 +1,5 @@
 import {render, h} from 'preact';
+import 'immutable-merge-operators';
 
 import {store as currentStore} from './store';
 import Routes from './routes';

@@ -63,10 +63,12 @@
     "write-file-webpack-plugin": "^4.0.2"
   },
   "dependencies": {
+    "immutable-merge-operators": "^0.2.1",
     "preact": "^8.1.0",
     "preact-router": "^2.5.2",
     "redux": "^3.6.0",
     "redux-observable": "^0.14.1",
+    "redux-pure-subscribe": "^0.1.1",
     "rxjs": "^5.2.1-smooth"
   },
   "scripts": {
