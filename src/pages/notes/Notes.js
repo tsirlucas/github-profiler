@@ -1,7 +1,8 @@
 import {h, Component} from 'preact';
+import pureSubscribe from 'redux-pure-subscribe';
 
-import bind from '../../util/bind';
 import {store} from '../../index';
+import pure from '../../util/pureComponent';
 import NoUser from '../../commons/NoUser';
 import NotesForm from './components/NotesForm';
 import {getCurrentState} from '../../store';
@@ -10,14 +11,13 @@ import NotesItem from '../../commons/components/ListItem';
 import {isUserDefined} from '../../core/user/user.helper';
 import {addNote, removeNote, editNote, listNotes} from '../../core/notes/notes.actions';
 
+@pure()
 export default class Notes extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			userInput: '',
-			notes: {content: []}
-		};
-	}
+	state = {
+		userInput: '',
+		notes: {content: []}
+	};
+
 
 	componentWillMount() {
 		let {user} = getCurrentState();
@@ -28,52 +28,43 @@ export default class Notes extends Component {
 
 	componentDidMount() {
 		this.syncState(store);
-		this.unsubscribe = store.subscribe(() => this.syncState(store));
+		this.unsubscribe = pureSubscribe(store, this.syncState, 'notes');
 	}
 
 	componentWillUnmount() {
 		this.unsubscribe();
 	}
 
-	@bind
-	syncState({getState}) {
-		const {notes} = getState();
-		this.setState({notes})
-	}
+	syncState = ({notes}) => this.setState({notes});
 
-	@bind
-	handleUpdateInput(ev) {
-		this.setState({userInput: ev.target.value});
-	}
+	handleUpdateInput = (ev) => this.setState({userInput: ev.target.value});
 
-	@bind
-	addNoteHandler(e) {
+	addNoteHandler = (e) => {
 		e.preventDefault();
 		const {user} = getCurrentState();
 		if (isUserDefined() && this.state.userInput.trim().length > 0) {
 			store.dispatch(addNote(this.state.userInput, user.login.toLowerCase()));
 			this.setState({userInput: ''});
 		}
-	}
+	};
 
-	@bind
-	removeNoteHandler(note) {
+	removeNoteHandler = (note) => {
 		const {user} = getCurrentState();
 		if (isUserDefined()) {
 			store.dispatch(removeNote(note, user.login.toLowerCase()));
 		}
-	}
+	};
 
-	@bind
-	editNoteHandler(note, text) {
+	editNoteHandler = (note, text) => {
 		const {user} = getCurrentState();
 		if (isUserDefined()) {
 			store.dispatch(editNote(note, text, user.login));
 		}
-	}
+	};
 
 	render(props, {userInput, notes}) {
-		let {user} = getCurrentState();
+		const {user} = getCurrentState();
+
 		return (user.login ?
 				<div id='notes'>
 					<NotesList>

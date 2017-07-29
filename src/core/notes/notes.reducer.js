@@ -34,27 +34,27 @@ const NotesReducer = (state = {content: []}, {payload, type}) => {
 		case REMOVE_NOTE:
 			return state.deepMergeIn(
 				['content'],
-				(content = []) => content.merge(state.content.map((note) => {
+				(content = []) => state.content.map((note) => {
 					if (note.id === payload.note.id) {
 						note.removing = true;
 					}
 					return note;
-				}))
+				})
 			);
 		case RESOLVE_REMOVE_NOTE:
 			return state.deepMergeIn(
 				['content'],
-				(content = []) => content.merge(state.content.filter(note => note.id !== payload.note.id))
+				(content = []) => state.content.filter(note => note.id !== payload.note.id)
 			);
 		case REMOVE_NOTE_ERROR:
 			return state.deepMergeIn(
 				['content'],
-				(content = []) => content.merge(state.content.map((note) => {
+				(content = []) => state.content.map((note) => {
 					if (note.id === payload.note.id) {
 						note.removing = false;
 					}
 					return note;
-				}))
+				})
 			);
 		case RESOLVE_EDIT_NOTE:
 			return state.deepMergeIn(
